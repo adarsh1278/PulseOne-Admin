@@ -6,6 +6,7 @@ import Breadcrumb from "@/component/breadcrumb";
 
 export default function LayoutClient({ children }) {
   const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(false);
+  const [isSidebarHovered, setIsSidebarHovered] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
@@ -28,6 +29,21 @@ export default function LayoutClient({ children }) {
     setIsSidebarCollapsed(!isSidebarCollapsed);
   };
 
+  const handleSidebarMouseEnter = () => {
+    if (!isMobile) {
+      setIsSidebarHovered(true);
+    }
+  };
+
+  const handleSidebarMouseLeave = () => {
+    if (!isMobile) {
+      setIsSidebarHovered(false);
+    }
+  };
+
+  // Determine if sidebar should be expanded
+  const isSidebarExpanded = !isMobile && (isSidebarHovered || !isSidebarCollapsed);
+
   return (
     <div className="flex flex-col h-screen w-screen overflow-hidden">
       {/* Fixed Navbar */}
@@ -38,14 +54,21 @@ export default function LayoutClient({ children }) {
       {/* Main Content Area */}
       <div className="flex flex-row pt-14 h-full w-full relative">
         {/* Sidebar - Desktop: Normal, Mobile: Overlay */}
-        <div className={`${
-          isMobile 
-            ? `fixed left-0 top-14 h-[calc(100vh-3.5rem)] z-40 transition-transform duration-300 ease-in-out ${
-                isSidebarCollapsed ? '-translate-x-full' : 'translate-x-0'
-              }`
-            : 'flex-shrink-0 relative'
-        }`}>
-          <Sidebar isCollapsed={!isMobile && isSidebarCollapsed} />
+        <div 
+          className={`${
+            isMobile 
+              ? `fixed left-0 top-14 h-[calc(100vh-3.5rem)] z-40 transition-transform duration-300 ease-in-out ${
+                  isSidebarCollapsed ? '-translate-x-full' : 'translate-x-0'
+                }`
+              : 'flex-shrink-0 relative'
+          }`}
+          onMouseEnter={handleSidebarMouseEnter}
+          onMouseLeave={handleSidebarMouseLeave}
+        >
+          <Sidebar 
+            isCollapsed={isMobile ? false : !isSidebarExpanded} 
+            isHovered={isSidebarHovered}
+          />
         </div>
 
         {/* Mobile Overlay Background */}
