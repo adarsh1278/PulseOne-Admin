@@ -16,8 +16,8 @@ const Breadcrumb = ({ currentPage = "Dashboard" }) => {
   ];
 
   return (
-    <div className="bg-gray-50 border-b border-gray-200 px-6 py-4">
-      <div className="flex items-center justify-between">
+    <div className="bg-gray-50 border-b border-gray-200 px-4 md:px-6 py-3 md:py-4">
+      <div className="flex flex-col md:flex-row md:items-center justify-between gap-3 md:gap-0">
         {/* Breadcrumb Navigation */}
         <div className="flex items-center space-x-2 text-sm">
           <div className="flex items-center space-x-2 text-blue-600">
@@ -29,12 +29,12 @@ const Breadcrumb = ({ currentPage = "Dashboard" }) => {
         </div>
 
         {/* Time Filter Buttons */}
-        <div className="flex items-center space-x-2">
+        <div className="flex flex-wrap items-center gap-1 md:gap-2 overflow-x-auto">
           {timeFilters.map((filter) => (
             <button
               key={filter.value}
               onClick={() => setActiveFilter(filter.label)}
-              className={`px-3 py-1.5 text-sm font-medium rounded-lg transition-all duration-200 ease-in-out ${
+              className={`px-2 md:px-3 py-1 md:py-1.5 text-xs md:text-sm font-medium rounded-lg transition-all duration-200 ease-in-out whitespace-nowrap ${
                 activeFilter === filter.label
                   ? 'bg-blue-600 text-white shadow-sm'
                   : 'bg-white text-gray-600 hover:bg-gray-100 hover:text-gray-800 border border-gray-200'

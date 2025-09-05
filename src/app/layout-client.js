@@ -1,11 +1,28 @@
 "use client"
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Sidebar from "@/component/sideBar";
 import Navbar from "@/component/navBar";
 import Breadcrumb from "@/component/breadcrumb";
 
 export default function LayoutClient({ children }) {
   const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkScreenSize = () => {
+      const mobile = window.innerWidth < 768;
+      setIsMobile(mobile);
+      // On mobile, start with sidebar closed
+      if (mobile) {
+        setIsSidebarCollapsed(true);
+      }
+    };
+
+    checkScreenSize();
+    window.addEventListener('resize', checkScreenSize);
+
+    return () => window.removeEventListener('resize', checkScreenSize);
+  }, []);
 
   const toggleSidebar = () => {
     setIsSidebarCollapsed(!isSidebarCollapsed);
@@ -19,14 +36,28 @@ export default function LayoutClient({ children }) {
       </div>
       
       {/* Main Content Area */}
-      <div className="flex flex-row pt-14 h-full w-full">
-        {/* Sidebar */}
-        <div className="flex-shrink-0">
-          <Sidebar isCollapsed={isSidebarCollapsed} />
+      <div className="flex flex-row pt-14 h-full w-full relative">
+        {/* Sidebar - Desktop: Normal, Mobile: Overlay */}
+        <div className={`${
+          isMobile 
+            ? `fixed left-0 top-14 h-[calc(100vh-3.5rem)] z-40 transition-transform duration-300 ease-in-out ${
+                isSidebarCollapsed ? '-translate-x-full' : 'translate-x-0'
+              }`
+            : 'flex-shrink-0 relative'
+        }`}>
+          <Sidebar isCollapsed={!isMobile && isSidebarCollapsed} />
         </div>
+
+        {/* Mobile Overlay Background */}
+        {isMobile && !isSidebarCollapsed && (
+          <div 
+            className="fixed inset-0 bg-black bg-opacity-50 z-30 top-14"
+            onClick={toggleSidebar}
+          />
+        )}
         
         {/* Content Area with Breadcrumb */}
-        <div className="flex-1 h-full flex flex-col">
+        <div className={`flex-1 h-full flex flex-col ${isMobile ? 'w-full' : ''}`}>
           {/* Fixed Breadcrumb */}
           <div className="flex-shrink-0">
             <Breadcrumb />
