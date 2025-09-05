@@ -13,36 +13,17 @@ import {
   BarChart3
 } from 'lucide-react';
 
-const Sidebar = () => {
+const Sidebar = ({ isCollapsed = false }) => {
   const [isDoctorsOpen, setIsDoctorsOpen] = useState(true);
   const [isPatientsOpen, setIsPatientsOpen] = useState(false);
-  const [isCollapsed, setIsCollapsed] = useState(false);
 
   const toggleDoctors = () => setIsDoctorsOpen(!isDoctorsOpen);
   const togglePatients = () => setIsPatientsOpen(!isPatientsOpen);
-  const toggleSidebar = () => setIsCollapsed(!isCollapsed);
 
   return (
-    <div className={`bg-white shadow-lg transition-all duration-300 ease-in-out ${isCollapsed ? 'w-16' : 'w-72'} h-screen flex flex-col`}>
+    <div className={`bg-white shadow-lg transition-all duration-300 ease-in-out ${isCollapsed ? 'w-16' : 'w-72'} h-full flex flex-col`}>
       {/* Header */}
-      <div className="bg-blue-600 text-white p-4 flex items-center justify-between">
-        <div className="flex items-center space-x-3">
-          <button 
-            onClick={toggleSidebar}
-            className="p-1 hover:bg-blue-700 rounded transition-colors duration-200"
-          >
-            <Menu size={20} />
-          </button>
-          {!isCollapsed && (
-            <>
-              <div className="bg-white rounded-lg p-2">
-                <BarChart3 className="text-blue-600" size={20} />
-              </div>
-              <span className="font-bold text-xl">Plus One</span>
-            </>
-          )}
-        </div>
-      </div>
+     
 
       {/* User Profile */}
       {!isCollapsed && (
