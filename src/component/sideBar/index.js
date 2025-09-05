@@ -23,13 +23,13 @@ const Sidebar = () => {
   const toggleSidebar = () => setIsCollapsed(!isCollapsed);
 
   return (
-    <div className={`bg-white shadow-lg transition-all duration-300 ${isCollapsed ? 'w-16' : 'w-72'} h-screen flex flex-col`}>
+    <div className={`bg-white shadow-lg transition-all duration-300 ease-in-out ${isCollapsed ? 'w-16' : 'w-72'} h-screen flex flex-col`}>
       {/* Header */}
       <div className="bg-blue-600 text-white p-4 flex items-center justify-between">
         <div className="flex items-center space-x-3">
           <button 
             onClick={toggleSidebar}
-            className="p-1 hover:bg-blue-700 rounded"
+            className="p-1 hover:bg-blue-700 rounded transition-colors duration-200"
           >
             <Menu size={20} />
           </button>
@@ -38,7 +38,7 @@ const Sidebar = () => {
               <div className="bg-white rounded-lg p-2">
                 <BarChart3 className="text-blue-600" size={20} />
               </div>
-              <span className="font-bold text-xl">Medflex</span>
+              <span className="font-bold text-xl">Plus One</span>
             </>
           )}
         </div>
@@ -64,23 +64,23 @@ const Sidebar = () => {
       )}
 
       {/* Navigation Menu */}
-      <nav className="flex-1 p-4 space-y-2 overflow-y-auto">
+      <nav className="flex-1 p-4 space-y-2 overflow-y-auto hide-scrollbar">
         {/* Hospital Dashboard */}
         <div className="bg-blue-50 rounded-lg">
-          <a href="#" className="flex items-center space-x-3 p-3 text-blue-600 hover:bg-blue-100 rounded-lg transition-colors">
+          <a href="#" className="flex items-center space-x-3 p-3 text-blue-600 hover:bg-blue-100 rounded-lg transition-all duration-200 ease-in-out">
             <Home size={20} />
             {!isCollapsed && <span className="font-medium">Hospital Dashboard</span>}
           </a>
         </div>
 
         {/* Medical Dashboard */}
-        <a href="#" className="flex items-center space-x-3 p-3 text-gray-700 hover:bg-gray-100 rounded-lg transition-colors">
+        <a href="#" className="flex items-center space-x-3 p-3 text-gray-700 hover:bg-blue-50 hover:text-blue-600 rounded-lg transition-all duration-200 ease-in-out">
           <Building2 size={20} />
           {!isCollapsed && <span>Medical Dashboard</span>}
         </a>
 
         {/* Dentist Dashboard */}
-        <a href="#" className="flex items-center space-x-3 p-3 text-gray-700 hover:bg-gray-100 rounded-lg transition-colors">
+        <a href="#" className="flex items-center space-x-3 p-3 text-gray-700 hover:bg-blue-50 hover:text-blue-600 rounded-lg transition-all duration-200 ease-in-out">
           <Stethoscope size={20} />
           {!isCollapsed && <span>Dentist Dashboard</span>}
         </a>
@@ -89,75 +89,83 @@ const Sidebar = () => {
         <div>
           <button 
             onClick={toggleDoctors}
-            className="w-full flex items-center justify-between p-3 text-gray-700 hover:bg-gray-100 rounded-lg transition-colors"
+            className="w-full flex items-center justify-between p-3 text-gray-700 hover:bg-blue-50 hover:text-blue-600 rounded-lg transition-all duration-200 ease-in-out"
           >
             <div className="flex items-center space-x-3">
               <Users size={20} />
               {!isCollapsed && <span>Doctors</span>}
             </div>
             {!isCollapsed && (
-              isDoctorsOpen ? <ChevronDown size={16} /> : <ChevronRight size={16} />
+              <div className="transition-transform duration-200 ease-in-out">
+                {isDoctorsOpen ? <ChevronDown size={16} /> : <ChevronRight size={16} />}
+              </div>
             )}
           </button>
           
-          {isDoctorsOpen && !isCollapsed && (
+          <div className={`overflow-hidden transition-all duration-300 ease-in-out ${
+            isDoctorsOpen && !isCollapsed ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'
+          }`}>
             <div className="ml-6 mt-2 space-y-2">
-              <a href="#" className="block p-2 text-gray-600 hover:text-gray-800 hover:bg-gray-50 rounded transition-colors">
+              <a href="#" className="block p-2 text-gray-600 hover:text-blue-600 hover:bg-blue-50 rounded transition-all duration-200 ease-in-out">
                 Doctors Dashboard
               </a>
-              <a href="#" className="block p-2 text-gray-600 hover:text-gray-800 hover:bg-gray-50 rounded transition-colors">
+              <a href="#" className="block p-2 text-gray-600 hover:text-blue-600 hover:bg-blue-50 rounded transition-all duration-200 ease-in-out">
                 Doctors List
               </a>
-              <a href="#" className="block p-2 text-gray-600 hover:text-gray-800 hover:bg-gray-50 rounded transition-colors">
+              <a href="#" className="block p-2 text-gray-600 hover:text-blue-600 hover:bg-blue-50 rounded transition-all duration-200 ease-in-out">
                 Doctors Cards
               </a>
-              <a href="#" className="block p-2 text-gray-600 hover:text-gray-800 hover:bg-gray-50 rounded transition-colors">
+              <a href="#" className="block p-2 text-gray-600 hover:text-blue-600 hover:bg-blue-50 rounded transition-all duration-200 ease-in-out">
                 Doctors Profile
               </a>
-              <a href="#" className="block p-2 text-gray-600 hover:text-gray-800 hover:bg-gray-50 rounded transition-colors">
+              <a href="#" className="block p-2 text-gray-600 hover:text-blue-600 hover:bg-blue-50 rounded transition-all duration-200 ease-in-out">
                 Add Doctor
               </a>
-              <a href="#" className="block p-2 text-gray-600 hover:text-gray-800 hover:bg-gray-50 rounded transition-colors">
+              <a href="#" className="block p-2 text-gray-600 hover:text-blue-600 hover:bg-blue-50 rounded transition-all duration-200 ease-in-out">
                 Edit Doctor
               </a>
             </div>
-          )}
+          </div>
         </div>
 
         {/* Patients Section */}
         <div>
           <button 
             onClick={togglePatients}
-            className="w-full flex items-center justify-between p-3 text-gray-700 hover:bg-gray-100 rounded-lg transition-colors"
+            className="w-full flex items-center justify-between p-3 text-gray-700 hover:bg-blue-50 hover:text-blue-600 rounded-lg transition-all duration-200 ease-in-out"
           >
             <div className="flex items-center space-x-3">
               <Heart size={20} />
               {!isCollapsed && <span>Patients</span>}
             </div>
             {!isCollapsed && (
-              isPatientsOpen ? <ChevronDown size={16} /> : <ChevronRight size={16} />
+              <div className="transition-transform duration-200 ease-in-out">
+                {isPatientsOpen ? <ChevronDown size={16} /> : <ChevronRight size={16} />}
+              </div>
             )}
           </button>
           
-          {isPatientsOpen && !isCollapsed && (
+          <div className={`overflow-hidden transition-all duration-300 ease-in-out ${
+            isPatientsOpen && !isCollapsed ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'
+          }`}>
             <div className="ml-6 mt-2 space-y-2">
-              <a href="#" className="block p-2 text-gray-600 hover:text-gray-800 hover:bg-gray-50 rounded transition-colors">
+              <a href="#" className="block p-2 text-gray-600 hover:text-blue-600 hover:bg-blue-50 rounded transition-all duration-200 ease-in-out">
                 Patients List
               </a>
-              <a href="#" className="block p-2 text-gray-600 hover:text-gray-800 hover:bg-gray-50 rounded transition-colors">
+              <a href="#" className="block p-2 text-gray-600 hover:text-blue-600 hover:bg-blue-50 rounded transition-all duration-200 ease-in-out">
                 Patient Records
               </a>
-              <a href="#" className="block p-2 text-gray-600 hover:text-gray-800 hover:bg-gray-50 rounded transition-colors">
+              <a href="#" className="block p-2 text-gray-600 hover:text-blue-600 hover:bg-blue-50 rounded transition-all duration-200 ease-in-out">
                 Add Patient
               </a>
             </div>
-          )}
+          </div>
         </div>
       </nav>
 
       {/* Emergency Contact */}
       <div className="p-4">
-        <div className="bg-green-500 text-white rounded-lg p-4 hover:bg-green-600 transition-colors cursor-pointer">
+        <div className="bg-green-500 text-white rounded-lg p-4 hover:bg-green-600 transition-all duration-200 ease-in-out cursor-pointer hover:shadow-lg">
           <div className="flex items-center space-x-3">
             <Phone size={20} />
             {!isCollapsed && (
