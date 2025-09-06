@@ -7,6 +7,49 @@
 :root {
   --background: #ffffff;
   --foreground: #171717;
+  
+  /* Dashboard Color Scheme */
+  --primary-blue: #3b82f6;
+  --primary-blue-dark: #1d4ed8;
+  --primary-blue-light: #60a5fa;
+  --primary-blue-gradient: linear-gradient(135deg, #3b82f6, #1e40af);
+  
+  --secondary-green: #10b981;
+  --secondary-green-light: #6ee7b7;
+  --secondary-orange: #f59e0b;
+  --secondary-orange-light: #fbbf24;
+  
+  --accent-cyan: #06b6d4;
+  --accent-cyan-light: #67e8f9;
+  
+  --success-green: #22c55e;
+  --warning-orange: #f97316;
+  --danger-red: #ef4444;
+  
+  --gray-50: #f9fafb;
+  --gray-100: #f3f4f6;
+  --gray-200: #e5e7eb;
+  --gray-300: #d1d5db;
+  --gray-400: #9ca3af;
+  --gray-500: #6b7280;
+  --gray-600: #4b5563;
+  --gray-700: #374151;
+  --gray-800: #1f2937;
+  --gray-900: #111827;
+  
+  /* Chart Colors */
+  --chart-blue: #3b82f6;
+  --chart-green: #10b981;
+  --chart-orange: #f59e0b;
+  --chart-purple: #8b5cf6;
+  --chart-pink: #ec4899;
+  --chart-cyan: #06b6d4;
+  
+  /* Gradients */
+  --hero-gradient: linear-gradient(135deg, #3b82f6 0%, #1e40af 100%);
+  --card-gradient: linear-gradient(145deg, #ffffff 0%, #f8fafc 100%);
+  --success-gradient: linear-gradient(135deg, #10b981 0%, #059669 100%);
+  --warning-gradient: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
 }
 
 @media (prefers-color-scheme: dark) {

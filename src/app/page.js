@@ -1,14 +1,28 @@
-import Image from "next/image";
+"use client"
+import React from 'react';
+import HeroSection from '@/components/dashboard/HeroSection';
+import StatsCards from '@/components/dashboard/StatsCards';
+import MetricsGrid from '@/components/dashboard/MetricsGrid';
+import HospitalEarnings from '@/components/dashboard/HospitalEarnings';
+import ChartsSection from '@/components/dashboard/ChartsSection';
 
-export default function Home() {
+export default function Dashboard() {
   return (
-    <div>
-      <div className=" w-full h-screen bg-amber-700">
-hi
-      </div>
-            <div className=" w-full h-screen bg-amber-700">
-hi
-      </div>
+    <div className="min-h-screen bg-gray-50 p-2 md:p-4 lg:p-6 space-y-4 md:space-y-6 overflow-x-hidden">
+      {/* Hero Section */}
+      <HeroSection />
+      
+      {/* Stats Cards */}
+      <StatsCards />
+      
+      {/* Hospital Earnings */}
+      <HospitalEarnings />
+      
+      {/* Metrics Grid */}
+      <MetricsGrid />
+      
+      {/* Charts and Analytics */}
+      <ChartsSection />
     </div>
   );
 }
