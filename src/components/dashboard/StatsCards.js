@@ -148,7 +148,7 @@ const StatsCards = () => {
                   <span className="text-xs text-gray-500">{stat.period}</span>
                 </div>
                 
-                <button className="text-sm font-medium group-hover:text-blue-600 transition-colors" style={{ color: stat.color }}>
+                <button className="text-sm font-medium group-hover:text-blue-600 transition-colors" style={{ color: stat.color }} suppressHydrationWarning>
                   View All
                 </button>
               </div>

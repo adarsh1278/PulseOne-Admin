@@ -22,7 +22,13 @@ const Navbar = ({ toggleSidebar }) => {
   const [isProfileOpen, setIsProfileOpen] = useState(false);
   const [isNotificationOpen, setIsNotificationOpen] = useState(false);
   const [isActivityOpen, setIsActivityOpen] = useState(false);
+  const [isMounted, setIsMounted] = useState(false);
   const profileRef = useRef(null);
+
+  // Handle hydration
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
 
   // Close dropdown when clicking outside
   useEffect(() => {
@@ -68,6 +74,70 @@ const Navbar = ({ toggleSidebar }) => {
   const timeFilters = ['today', '7d', '2w'];
   const activityFilters = ['3m', '6m', '1y'];
 
+  if (!isMounted) {
+    return (
+      <nav className="bg-blue-600 text-white px-4 md:px-6 py-1 flex items-center justify-between shadow-lg">
+        <div className="flex items-center space-x-2 md:space-x-4">
+          <button className="p-1 hover:bg-blue-700 rounded transition-colors">
+            <Menu size={20} />
+          </button>
+          <div className="flex items-center space-x-2 md:space-x-3">
+            <div className="bg-white rounded-lg p-1.5 md:p-2">
+              <BarChart3 className="text-blue-600" size={20} />
+            </div>
+            <span className="text-lg md:text-2xl font-bold hidden sm:block">Medflex</span>
+            <span className="text-lg font-bold sm:hidden">MF</span>
+          </div>
+        </div>
+        <div className="hidden lg:flex flex-1 max-w-2xl mx-8">
+          <div className="relative w-full">
+            <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" size={20} />
+            <input
+              type="text"
+              placeholder="Search..."
+              className="w-full bg-white text-gray-800 pl-10 pr-4 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-300"
+            />
+          </div>
+        </div>
+        <div className="lg:hidden">
+          <button className="p-2 hover:bg-blue-700 rounded-full transition-colors">
+            <Search size={20} />
+          </button>
+        </div>
+        <div className="flex items-center space-x-2 md:space-x-4">
+          <div className="hidden md:flex w-8 h-6 bg-white rounded overflow-hidden">
+            <div className="w-1/3 bg-blue-600"></div>
+            <div className="w-1/3 bg-white"></div>
+            <div className="w-1/3 bg-red-600"></div>
+          </div>
+          <button className="hidden md:block p-2 hover:bg-blue-700 rounded-full transition-colors">
+            <Settings size={20} />
+          </button>
+          <div className="relative">
+            <button className="p-2 hover:bg-blue-700 rounded-full transition-colors relative">
+              <Bell size={18} />
+              <span className="absolute -top-1 -right-1 bg-red-500 text-xs rounded-full w-4 h-4 md:w-5 md:h-5 flex items-center justify-center">
+                3
+              </span>
+            </button>
+          </div>
+          <div className="relative hidden md:block">
+            <button className="p-2 hover:bg-blue-700 rounded-full transition-colors">
+              <Calendar size={20} />
+            </button>
+          </div>
+          <div className="relative">
+            <button className="flex items-center space-x-2 hover:bg-blue-700 rounded-lg p-1 md:p-2 transition-colors">
+              <div className="w-7 h-7 md:w-8 md:h-8 bg-white rounded-full flex items-center justify-center">
+                <span className="text-blue-600 font-bold text-xs md:text-sm">JB</span>
+              </div>
+            </button>
+          </div>
+        </div>
+      </nav>
+    );
+  }
+
   return (
     <nav className="bg-blue-600 text-white px-4 md:px-6 py-1 flex items-center justify-between shadow-lg">
       {/* Left Side - Logo and Menu */}
@@ -75,6 +145,7 @@ const Navbar = ({ toggleSidebar }) => {
         <button 
           className="p-1 hover:bg-blue-700 rounded transition-colors"
           onClick={toggleSidebar}
+          suppressHydrationWarning
         >
           <Menu size={20} />
         </button>
@@ -95,13 +166,14 @@ const Navbar = ({ toggleSidebar }) => {
             type="text"
             placeholder="Search..."
             className="w-full bg-white text-gray-800 pl-10 pr-4 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-300"
+            suppressHydrationWarning
           />
         </div>
       </div>
 
       {/* Mobile Search Button */}
       <div className="lg:hidden">
-        <button className="p-2 hover:bg-blue-700 rounded-full transition-colors">
+        <button className="p-2 hover:bg-blue-700 rounded-full transition-colors" suppressHydrationWarning>
           <Search size={20} />
         </button>
       </div>
@@ -116,7 +188,7 @@ const Navbar = ({ toggleSidebar }) => {
         </div>
 
         {/* Settings Icon - Hidden on mobile */}
-        <button className="hidden md:block p-2 hover:bg-blue-700 rounded-full transition-colors">
+        <button className="hidden md:block p-2 hover:bg-blue-700 rounded-full transition-colors" suppressHydrationWarning>
           <Settings size={20} />
         </button>
 
@@ -126,6 +198,7 @@ const Navbar = ({ toggleSidebar }) => {
             className="p-2 hover:bg-blue-700 rounded-full transition-colors relative"
             onMouseEnter={() => setIsNotificationOpen(true)}
             onMouseLeave={() => setIsNotificationOpen(false)}
+            suppressHydrationWarning
           >
             <Bell size={18} />
             <span className="absolute -top-1 -right-1 bg-red-500 text-xs rounded-full w-4 h-4 md:w-5 md:h-5 flex items-center justify-center">
@@ -158,7 +231,7 @@ const Navbar = ({ toggleSidebar }) => {
                 ))}
               </div>
               <div className="p-3 md:p-4 bg-gray-50">
-                <button className="w-full bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700 transition-colors text-sm md:text-base">
+                <button className="w-full bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700 transition-colors text-sm md:text-base" suppressHydrationWarning>
                   View all notifications
                 </button>
               </div>
@@ -172,6 +245,7 @@ const Navbar = ({ toggleSidebar }) => {
             className="p-2 hover:bg-blue-700 rounded-full transition-colors"
             onMouseEnter={() => setIsActivityOpen(true)}
             onMouseLeave={() => setIsActivityOpen(false)}
+            suppressHydrationWarning
           >
             <Calendar size={20} />
           </button>
@@ -195,6 +269,7 @@ const Navbar = ({ toggleSidebar }) => {
                             ? 'bg-gray-200 text-gray-800' 
                             : 'text-gray-600 hover:bg-gray-100'
                         }`}
+                        suppressHydrationWarning
                       >
                         {filter}
                       </button>
@@ -234,7 +309,7 @@ const Navbar = ({ toggleSidebar }) => {
                 </div>
               </div>
               <div className="p-4 bg-gray-50">
-                <button className="w-full bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700 transition-colors">
+                <button className="w-full bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700 transition-colors" suppressHydrationWarning>
                   View all activity
                 </button>
               </div>
@@ -247,6 +322,7 @@ const Navbar = ({ toggleSidebar }) => {
           <button 
             className="flex items-center space-x-2 hover:bg-blue-700 rounded-lg p-1 md:p-2 transition-colors"
             onClick={() => setIsProfileOpen(!isProfileOpen)}
+            suppressHydrationWarning
           >
             <div className="w-7 h-7 md:w-8 md:h-8 bg-white rounded-full flex items-center justify-center">
               <span className="text-blue-600 font-bold text-xs md:text-sm">JB</span>
@@ -277,6 +353,7 @@ const Navbar = ({ toggleSidebar }) => {
                           ? 'bg-blue-600 text-white' 
                           : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
                       }`}
+                      suppressHydrationWarning
                     >
                       {filter}
                     </button>
@@ -284,17 +361,17 @@ const Navbar = ({ toggleSidebar }) => {
                 </div>
               </div>
               <div className="p-2">
-                <button className="w-full flex items-center space-x-3 p-2 md:p-3 hover:bg-gray-100 rounded-lg transition-colors">
+                <button className="w-full flex items-center space-x-3 p-2 md:p-3 hover:bg-gray-100 rounded-lg transition-colors" suppressHydrationWarning>
                   <User size={18} />
                   <span className="text-sm md:text-base">Profile</span>
                 </button>
-                <button className="w-full flex items-center space-x-3 p-2 md:p-3 hover:bg-gray-100 rounded-lg transition-colors">
+                <button className="w-full flex items-center space-x-3 p-2 md:p-3 hover:bg-gray-100 rounded-lg transition-colors" suppressHydrationWarning>
                   <Settings size={18} />
                   <span className="text-sm md:text-base">Settings</span>
                 </button>
               </div>
               <div className="p-2 border-t">
-                <button className="w-full bg-red-500 text-white py-2 rounded-lg hover:bg-red-600 transition-colors flex items-center justify-center space-x-2 text-sm md:text-base">
+                <button className="w-full bg-red-500 text-white py-2 rounded-lg hover:bg-red-600 transition-colors flex items-center justify-center space-x-2 text-sm md:text-base" suppressHydrationWarning>
                   <LogOut size={18} />
                   <span>Logout</span>
                 </button>

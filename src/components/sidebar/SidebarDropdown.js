@@ -21,6 +21,7 @@ const SidebarDropdown = ({
       <button 
         onClick={toggleOpen}
         className="w-full flex items-center justify-between p-3 text-gray-700 hover:bg-blue-50 hover:text-blue-600 rounded-lg transition-all duration-200 ease-in-out group"
+        suppressHydrationWarning
       >
         <div className="flex items-center space-x-3">
           <Icon size={20} className="text-gray-600 group-hover:text-blue-600" />

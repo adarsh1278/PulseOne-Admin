@@ -9,6 +9,7 @@ const SidebarSubItem = ({ label, onClick, isActive = false }) => {
           ? 'text-blue-600 bg-blue-50 font-medium' 
           : 'text-gray-600 hover:text-blue-600 hover:bg-blue-50'
       }`}
+      suppressHydrationWarning
     >
       {label}
     </button>

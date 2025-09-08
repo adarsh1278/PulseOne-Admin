@@ -18,6 +18,7 @@ const SidebarItem = ({
           ? 'bg-blue-100 text-blue-600 border-r-2 border-blue-600' 
           : 'text-gray-700 hover:bg-blue-50 hover:text-blue-600'
       } ${className}`}
+      suppressHydrationWarning
     >
       <div className="flex items-center space-x-3">
         <Icon size={20} className={isActive ? 'text-blue-600' : 'text-gray-600 group-hover:text-blue-600'} />

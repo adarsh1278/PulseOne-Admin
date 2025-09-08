@@ -7,25 +7,25 @@
 :root {
   --background: #ffffff;
   --foreground: #171717;
-  
+
   /* Dashboard Color Scheme */
   --primary-blue: #3b82f6;
   --primary-blue-dark: #1d4ed8;
   --primary-blue-light: #60a5fa;
   --primary-blue-gradient: linear-gradient(135deg, #3b82f6, #1e40af);
-  
+
   --secondary-green: #10b981;
   --secondary-green-light: #6ee7b7;
   --secondary-orange: #f59e0b;
   --secondary-orange-light: #fbbf24;
-  
+
   --accent-cyan: #06b6d4;
   --accent-cyan-light: #67e8f9;
-  
+
   --success-green: #22c55e;
   --warning-orange: #f97316;
   --danger-red: #ef4444;
-  
+
   --gray-50: #f9fafb;
   --gray-100: #f3f4f6;
   --gray-200: #e5e7eb;
@@ -36,7 +36,7 @@
   --gray-700: #374151;
   --gray-800: #1f2937;
   --gray-900: #111827;
-  
+
   /* Chart Colors */
   --chart-blue: #3b82f6;
   --chart-green: #10b981;
@@ -44,7 +44,7 @@
   --chart-purple: #8b5cf6;
   --chart-pink: #ec4899;
   --chart-cyan: #06b6d4;
-  
+
   /* Gradients */
   --hero-gradient: linear-gradient(135deg, #3b82f6 0%, #1e40af 100%);
   --card-gradient: linear-gradient(145deg, #ffffff 0%, #f8fafc 100%);

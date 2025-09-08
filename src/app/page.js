@@ -16,7 +16,7 @@ export default function Dashboard() {
       <StatsCards />
       
       {/* Hospital Earnings */}
-      <HospitalEarnings />
+      {/* <HospitalEarnings /> */}
       
       {/* Metrics Grid */}
       <MetricsGrid />

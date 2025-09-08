@@ -39,6 +39,7 @@ const Breadcrumb = ({ currentPage = "Dashboard" }) => {
                   ? 'bg-blue-600 text-white shadow-sm'
                   : 'bg-white text-gray-600 hover:bg-gray-100 hover:text-gray-800 border border-gray-200'
               }`}
+              suppressHydrationWarning
             >
               {filter.label}
             </button>
