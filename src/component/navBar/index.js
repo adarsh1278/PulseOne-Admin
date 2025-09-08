@@ -85,7 +85,7 @@ const Navbar = ({ toggleSidebar }) => {
             <div className="bg-white rounded-lg p-1.5 md:p-2">
               <BarChart3 className="text-blue-600" size={20} />
             </div>
-            <span className="text-lg md:text-2xl font-bold hidden sm:block">Medflex</span>
+            <span className="text-lg md:text-2xl font-bold hidden sm:block">PlusOne</span>
             <span className="text-lg font-bold sm:hidden">MF</span>
           </div>
         </div>
