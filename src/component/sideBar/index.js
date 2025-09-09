@@ -78,6 +78,7 @@ const Sidebar = ({ isCollapsed = false, isHovered = false }) => {
         />
 
         <SidebarItem
+         link={"/medical/dashboard"}
           icon={Building2}
           label="Medical Dashboard"
           isActive={activeItem === 'medical-dashboard'}

@@ -1,18 +1,24 @@
 import React from 'react';
 import { ChevronRight } from 'lucide-react';
+import { useRouter } from 'next/navigation';
 
 const SidebarItem = ({ 
   icon: Icon, 
   label, 
+  link,
   isActive = false, 
   isCollapsed = false, 
   hasArrow = false,
   onClick,
   className = ""
 }) => {
+  const router = useRouter();
   return (
     <button
-      onClick={onClick}
+      onClick={()=>{
+         router.push(link||"/")
+         onClick();
+      }}
       className={`w-full flex items-center justify-between p-3 rounded-lg transition-all duration-200 ease-in-out group ${
         isActive 
           ? 'bg-blue-100 text-blue-600 border-r-2 border-blue-600' 

@@ -443,7 +443,8 @@ const ChartsSection = () => {
 
       {/* Footer */}
       <div className="text-center py-4">
-        <p className="text-sm text-gray-500">© Medflex admin 2024</p>
+        <p className="text-sm text-gray-500">© 
+          PlusOne admin 2024</p>
       </div>
     </div>
   );
