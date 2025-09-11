@@ -101,7 +101,7 @@ const Sidebar = ({ isCollapsed = false, isHovered = false }) => {
           isCollapsed={!showContent}
           defaultOpen={true}
         >
-          <SidebarSubItem label="Doctors Dashboard" />
+          <SidebarSubItem label="Doctors Dashboard"  link='/doctor/dashboard' />
           <SidebarSubItem label="Doctors List" />
           <SidebarSubItem label="Doctors Cards" />
           <SidebarSubItem label="Doctors Profile" />

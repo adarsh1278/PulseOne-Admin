@@ -150,13 +150,13 @@ const Navbar = ({ toggleSidebar }) => {
           <Menu size={20} />
         </button>
         <div className="flex items-center space-x-2 md:space-x-3">
-          <div className="bg-white rounded-lg p-1.5 md:p-2">
-            <BarChart3 className="text-blue-600" size={20} />
-          </div>
+          
+            <img src='https://pulseone.in/logo.svg' className='w-[34px] h-[34px]'/>
+          
           <span className="text-lg md:text-2xl font-bold hidden sm:block">
 
 
-            PlusOne
+            PlusOn
           </span>
           <span className="text-lg font-bold sm:hidden">MF</span>
         </div>
