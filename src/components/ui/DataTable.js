@@ -14,7 +14,7 @@ const DataTable = ({
   onDelete,
   searchable = true,
   paginated = true,
-  itemsPerPageOptions = [12, 25, 50, 100]
+  itemsPerPageOptions = [12, 15, 50, 100]
 }) => {
   const [searchTerm, setSearchTerm] = useState('');
   const [currentPage, setCurrentPage] = useState(1);
@@ -42,11 +42,11 @@ const DataTable = ({
   };
 
   const ActionButton = ({ icon: Icon, onClick, variant = 'default', className = '' }) => {
-    const baseClasses = "p-2 rounded-lg transition-colors";
+    const baseClasses = "p-2 rounded transition-colors";
     const variants = {
-      view: "text-blue-600 hover:bg-blue-50 border border-blue-200",
-      edit: "text-green-600 hover:bg-green-50 border border-green-200", 
-      delete: "text-red-600 hover:bg-red-50 border border-red-200"
+      view: "text-blue-600 hover:bg-blue-50 border border-blue-300",
+      edit: "text-green-600 hover:bg-green-50 border border-green-300", 
+      delete: "text-orange-600 hover:bg-orange-50 border border-orange-300"
     };
     
     return (
@@ -85,7 +85,7 @@ const DataTable = ({
                 setItemsPerPage(Number(e.target.value));
                 setCurrentPage(1);
               }}
-              className="border border-gray-300 rounded-md px-3 py-1 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+              className="border border-gray-300 rounded-md px-3 py-1 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-gray-900"
             >
               {itemsPerPageOptions.map(option => (
                 <option key={option} value={option}>{option}</option>
@@ -106,7 +106,7 @@ const DataTable = ({
                   setSearchTerm(e.target.value);
                   setCurrentPage(1);
                 }}
-                className="border border-gray-300 rounded-md pl-3 pr-8 py-1 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 w-64"
+                className="border border-gray-300 rounded-md pl-3 pr-8 py-1 text-sm text-gray-900 bg-white focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 w-64"
                 placeholder="Search..."
               />
               <Search className="w-4 h-4 text-gray-400 absolute right-2 top-1/2 transform -translate-y-1/2" />
@@ -116,30 +116,28 @@ const DataTable = ({
       </div>
 
       {/* Table */}
-      <div className="overflow-x-auto">
-        <table className="w-full">
+      <div className="overflow-x-auto border border-gray-200 rounded-lg">
+        <table className="w-full border-collapse">
           <thead className="bg-gray-50">
             <tr>
               {columns.map((column, index) => (
                 <th
                   key={column.key}
-                  className={`px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider ${
-                    index === 0 ? 'rounded-tl-none' : ''
-                  } ${index === columns.length - 1 ? 'rounded-tr-none' : ''}`}
+                  className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider border-b border-gray-200"
                 >
                   {column.label}
                 </th>
               ))}
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider border-b border-gray-200">
                 Actions
               </th>
             </tr>
           </thead>
           <tbody className="bg-white divide-y divide-gray-200">
             {paginatedData.map((item, index) => (
-              <tr key={item.id || index} className="hover:bg-gray-50">
+              <tr key={item.id || index} className="hover:bg-gray-50 border-b border-gray-200">
                 {columns.map((column) => (
-                  <td key={column.key} className="px-6 py-4 whitespace-nowrap text-sm">
+                  <td key={column.key} className="px-6 py-4 whitespace-nowrap text-sm border-r border-gray-200 last:border-r-0">
                     {column.render ? column.render(item[column.key], item) : item[column.key]}
                   </td>
                 ))}
@@ -185,7 +183,7 @@ const DataTable = ({
             <button
               onClick={() => handlePageChange(currentPage - 1)}
               disabled={currentPage === 1}
-              className="px-3 py-1 text-sm border border-gray-300 rounded-md hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed"
+              className="px-3 py-1 text-sm text-gray-700 bg-white border border-gray-300 rounded-md hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed"
             >
               Previous
             </button>
@@ -209,7 +207,7 @@ const DataTable = ({
                   className={`px-3 py-1 text-sm border rounded-md ${
                     currentPage === pageNum
                       ? 'bg-blue-600 text-white border-blue-600'
-                      : 'border-gray-300 hover:bg-gray-50'
+                      : 'bg-white text-gray-700 border-gray-300 hover:bg-gray-50'
                   }`}
                 >
                   {pageNum}
@@ -220,7 +218,7 @@ const DataTable = ({
             <button
               onClick={() => handlePageChange(currentPage + 1)}
               disabled={currentPage === totalPages}
-              className="px-3 py-1 text-sm border border-gray-300 rounded-md hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed"
+              className="px-3 py-1 text-sm text-gray-700 bg-white border border-gray-300 rounded-md hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed"
             >
               Next
             </button>

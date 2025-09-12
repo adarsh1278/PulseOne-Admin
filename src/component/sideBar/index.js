@@ -102,7 +102,7 @@ const Sidebar = ({ isCollapsed = false, isHovered = false }) => {
           defaultOpen={true}
         >
           <SidebarSubItem label="Doctors Dashboard"  link='/doctor/dashboard' />
-          <SidebarSubItem label="Doctors List" />
+          <SidebarSubItem label="Doctors List" link='/doctor/list' />
           <SidebarSubItem label="Doctors Cards" />
           <SidebarSubItem label="Doctors Profile" />
           <SidebarSubItem label="Add Doctor" />
