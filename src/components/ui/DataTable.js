@@ -115,20 +115,20 @@ const DataTable = ({
         )}
       </div>
 
-      {/* Table */}
-      <div className="overflow-x-auto border border-gray-200 rounded-lg">
-        <table className="w-full border-collapse">
+      {/* Table Container with Responsive Overflow */}
+      <div className="overflow-x-auto sm:overflow-x-visible border border-gray-200 rounded-lg">
+        <table className="w-full min-w-full border-collapse">
           <thead className="bg-gray-50">
             <tr>
               {columns.map((column, index) => (
                 <th
                   key={column.key}
-                  className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider border-b border-gray-200"
+                  className="px-3 sm:px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider border-b border-gray-200 whitespace-nowrap sm:whitespace-normal"
                 >
                   {column.label}
                 </th>
               ))}
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider border-b border-gray-200">
+              <th className="px-3 sm:px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider border-b border-gray-200 whitespace-nowrap">
                 Actions
               </th>
             </tr>
@@ -137,17 +137,20 @@ const DataTable = ({
             {paginatedData.map((item, index) => (
               <tr key={item.id || index} className="hover:bg-gray-50 border-b border-gray-200">
                 {columns.map((column) => (
-                  <td key={column.key} className="px-6 py-4 whitespace-nowrap text-sm border-r border-gray-200 last:border-r-0">
-                    {column.render ? column.render(item[column.key], item) : item[column.key]}
+                  <td key={column.key} className="px-3 sm:px-6 py-4 text-sm border-r border-gray-200 last:border-r-0 whitespace-nowrap sm:whitespace-normal sm:break-words">
+                    <div className="max-w-xs sm:max-w-none overflow-hidden text-ellipsis">
+                      {column.render ? column.render(item[column.key], item) : item[column.key]}
+                    </div>
                   </td>
                 ))}
-                <td className="px-6 py-4 whitespace-nowrap text-sm">
-                  <div className="flex items-center gap-2">
+                <td className="px-3 sm:px-6 py-4 whitespace-nowrap text-sm">
+                  <div className="flex items-center gap-1 sm:gap-2">
                     {onView && (
                       <ActionButton
                         icon={Eye}
                         onClick={() => onView(item)}
                         variant="view"
+                        className="p-1 sm:p-2"
                       />
                     )}
                     {onEdit && (
@@ -155,6 +158,7 @@ const DataTable = ({
                         icon={Edit}
                         onClick={() => onEdit(item)}
                         variant="edit"
+                        className="p-1 sm:p-2"
                       />
                     )}
                     {onDelete && (
@@ -162,6 +166,7 @@ const DataTable = ({
                         icon={Trash2}
                         onClick={() => onDelete(item)}
                         variant="delete"
+                        className="p-1 sm:p-2"
                       />
                     )}
                   </div>
@@ -174,12 +179,12 @@ const DataTable = ({
 
       {/* Pagination */}
       {paginated && (
-        <div className="flex items-center justify-between px-6 py-3 border-t border-gray-200">
-          <div className="text-sm text-gray-600">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between px-6 py-3 border-t border-gray-200 gap-4">
+          <div className="text-sm text-gray-600 text-center sm:text-left">
             Showing Page {currentPage} of {totalPages}
           </div>
           
-          <div className="flex items-center gap-2">
+          <div className="flex items-center justify-center gap-2">
             <button
               onClick={() => handlePageChange(currentPage - 1)}
               disabled={currentPage === 1}

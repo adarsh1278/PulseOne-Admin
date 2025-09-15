@@ -15,7 +15,11 @@ import {
   Globe,
   FileText,
   Award,
-  Stethoscope
+  Stethoscope,
+  IdCard,
+  Users,
+  Heart,
+  MapPinIcon
 } from 'lucide-react';
 import { 
   FormInput, 
@@ -27,32 +31,32 @@ import {
   FileUpload 
 } from '../../components/ui';
 
-const DoctorRegistrationForm = () => {
+const DoctorRegistrationForm = ({ doctorData = null, isEdit = false }) => {
   const [formData, setFormData] = useState({
     // Personal Details
-    firstName: '',
-    lastName: '',
-    age: '',
-    gender: '',
-    createId: '',
-    email: '',
-    mobile: '',
-    maritalStatus: '',
-    qualification: '',
-    designation: '',
-    bloodGroup: '',
-    address: '',
-    country: '',
-    state: '',
-    city: '',
-    postalCode: '',
+    firstName: doctorData?.firstName || '',
+    lastName: doctorData?.lastName || '',
+    age: doctorData?.age || '',
+    gender: doctorData?.gender || '',
+    createId: doctorData?.createId || '',
+    email: doctorData?.email || '',
+    mobile: doctorData?.mobile || '',
+    maritalStatus: doctorData?.maritalStatus || '',
+    qualification: doctorData?.qualification || '',
+    designation: doctorData?.designation || '',
+    bloodGroup: doctorData?.bloodGroup || '',
+    address: doctorData?.address || '',
+    country: doctorData?.country || '',
+    state: doctorData?.state || '',
+    city: doctorData?.city || '',
+    postalCode: doctorData?.postalCode || '',
     
     // Profile and Bio
-    profilePhoto: null,
-    bio: '',
+    profilePhoto: doctorData?.profilePhoto || null,
+    bio: doctorData?.bio || '',
     
     // Availability
-    availability: {
+    availability: doctorData?.availability || {
       sunday: { from: '', to: '' },
       monday: { from: '', to: '' },
       tuesday: { from: '', to: '' },
@@ -63,7 +67,7 @@ const DoctorRegistrationForm = () => {
     },
     
     // Account Details
-    username: '',
+    username: doctorData?.username || '',
     password: '',
     confirmPassword: ''
   });
@@ -241,7 +245,11 @@ const DoctorRegistrationForm = () => {
     if (validateForm()) {
       console.log('Form submitted successfully:', formData);
       // Here you would typically send the data to your backend
-      alert('Doctor profile created successfully!');
+      if (isEdit) {
+        alert('Doctor profile updated successfully!');
+      } else {
+        alert('Doctor profile created successfully!');
+      }
     } else {
       console.log('Form validation failed:', errors);
     }
@@ -291,15 +299,34 @@ const DoctorRegistrationForm = () => {
                   />
                   
                   <div className="flex flex-col">
-                    <RadioGroup
-                      label="Gender"
-                      name="gender"
-                      value={formData.gender}
-                      onChange={handleInputChange}
-                      options={genderOptions}
-                      error={errors.gender}
-                      required
-                    />
+                    <label className="block text-sm font-medium text-gray-700 mb-1">
+                      Gender<span className="text-red-500">*</span>
+                    </label>
+                    <div className="flex gap-4">
+                      <label className="flex items-center">
+                        <input
+                          type="radio"
+                          name="gender"
+                          value="male"
+                          checked={formData.gender === 'male'}
+                          onChange={handleInputChange}
+                          className="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300"
+                        />
+                        <span className="ml-2 text-sm text-gray-900">Male</span>
+                      </label>
+                      <label className="flex items-center">
+                        <input
+                          type="radio"
+                          name="gender"
+                          value="female"
+                          checked={formData.gender === 'female'}
+                          onChange={handleInputChange}
+                          className="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300"
+                        />
+                        <span className="ml-2 text-sm text-gray-900">Female</span>
+                      </label>
+                    </div>
+                    {errors.gender && <p className="mt-1 text-sm text-red-600">{errors.gender}</p>}
                   </div>
                 </div>
 
@@ -310,7 +337,7 @@ const DoctorRegistrationForm = () => {
                     value={formData.createId}
                     onChange={handleInputChange}
                     placeholder="Create Unique ID"
-                    icon={<FileText className="h-4 w-4 text-gray-400" />}
+                    icon={<IdCard className="h-4 w-4 text-gray-400" />}
                     error={errors.createId}
                     required
                   />
@@ -340,18 +367,7 @@ const DoctorRegistrationForm = () => {
                   />
                 </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-                  <FormSelect
-                    label="Marital Status"
-                    name="maritalStatus"
-                    value={formData.maritalStatus}
-                    onChange={handleInputChange}
-                    options={maritalStatusOptions}
-                    placeholder="Select"
-                    icon={<User className="h-4 w-4 text-gray-400" />}
-                    error={errors.maritalStatus}
-                  />
-                  
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                   <FormSelect
                     label="Qualification"
                     name="qualification"
@@ -388,15 +404,26 @@ const DoctorRegistrationForm = () => {
                     required
                   />
                 </div>
-                
-                <div className="grid grid-cols-1 gap-4">
+
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <FormSelect
+                    label="Marital Status"
+                    name="maritalStatus"
+                    value={formData.maritalStatus}
+                    onChange={handleInputChange}
+                    options={maritalStatusOptions}
+                    placeholder="Select"
+                    icon={<Users className="h-4 w-4 text-gray-400" />}
+                    error={errors.maritalStatus}
+                  />
+
                   <FormInput
                     label="Address"
                     name="address"
                     value={formData.address}
                     onChange={handleInputChange}
                     placeholder="Enter Address"
-                    icon={<Home className="h-4 w-4 text-gray-400" />}
+                    icon={<MapPinIcon className="h-4 w-4 text-gray-400" />}
                     error={errors.address}
                     required
                   />
@@ -444,7 +471,7 @@ const DoctorRegistrationForm = () => {
                     value={formData.postalCode}
                     onChange={handleInputChange}
                     placeholder="Enter Postal Code"
-                    icon={<Mail className="h-4 w-4 text-gray-400" />}
+                    icon={<MapPin className="h-4 w-4 text-gray-400" />}
                     error={errors.postalCode}
                     required
                   />
@@ -605,7 +632,7 @@ My name is Dr. David Kemrin. Write your bio here."
             onClick={handleSubmit}
             className="px-6 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-colors"
           >
-            Create Doctor Profile
+            {isEdit ? 'Update Doctor Profile' : 'Create Doctor Profile'}
           </button>
         </div>
       </div>

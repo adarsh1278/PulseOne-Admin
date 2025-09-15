@@ -115,6 +115,7 @@ const Sidebar = ({ isCollapsed = false, isHovered = false }) => {
           label="Patients"
           isCollapsed={!showContent}
         >
+          <SidebarSubItem label="Patients Dashboard" link='/patient/dashboard' />
           <SidebarSubItem label="Patients List" />
           <SidebarSubItem label="Patient Records" />
           <SidebarSubItem label="Add Patient" />

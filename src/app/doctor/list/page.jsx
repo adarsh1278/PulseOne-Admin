@@ -235,7 +235,7 @@ const DoctorsList = () => {
 
     // Action handlers
     const handleAddDoctor = () => {
-        router.push('/doctor/add    ');
+        router.push('/doctor/add');
     };
 
     const handleViewDoctor = (doctor) => {
@@ -243,7 +243,9 @@ const DoctorsList = () => {
     };
 
     const handleEditDoctor = (doctor) => {
-        console.log('Edit doctor:', doctor);
+        // Extract the numeric ID from the doctor ID (remove the # symbol)
+        const doctorId = doctor.id.replace('#', '');
+        router.push(`/doctor/edit/${doctorId}`);
     };
 
     const handleDeleteDoctor = (doctor) => {
