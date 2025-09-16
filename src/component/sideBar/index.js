@@ -103,10 +103,10 @@ const Sidebar = ({ isCollapsed = false, isHovered = false }) => {
         >
           <SidebarSubItem label="Doctors Dashboard"  link='/doctor/dashboard' />
           <SidebarSubItem label="Doctors List" link='/doctor/list' />
-          <SidebarSubItem label="Doctors Cards" />
-          <SidebarSubItem label="Doctors Profile" />
-          <SidebarSubItem label="Add Doctor" />
-          <SidebarSubItem label="Edit Doctor" />
+          <SidebarSubItem label="Doctors Cards" link='/doctor/cards' />
+          <SidebarSubItem label="Doctors Profile" link='/doctor/profile/124' />
+          <SidebarSubItem label="Add Doctor" link = '/doctor/add' />
+          <SidebarSubItem label="Edit Doctor"  link='/doctor/edit'/>
         </SidebarDropdown>
 
         {/* Patients Dropdown */}
@@ -116,7 +116,7 @@ const Sidebar = ({ isCollapsed = false, isHovered = false }) => {
           isCollapsed={!showContent}
         >
           <SidebarSubItem label="Patients Dashboard" link='/patient/dashboard' />
-          <SidebarSubItem label="Patients List" />
+          <SidebarSubItem label="Patients List" link='/patient/list' />
           <SidebarSubItem label="Patient Records" />
           <SidebarSubItem label="Add Patient" />
           <SidebarSubItem label="Patient History" />

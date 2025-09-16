@@ -1,5 +1,5 @@
 import React from 'react';
-import MiniChart from '../charts/MiniChart';
+import MiniChart from '../resuable/charts/MiniChart.jsx';
 
 const HealthMetricsGrid = ({ healthMetrics }) => {
     return (

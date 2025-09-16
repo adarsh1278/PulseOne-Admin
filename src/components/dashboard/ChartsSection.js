@@ -17,54 +17,87 @@ import {
   Cell,
   ComposedChart
 } from 'recharts';
+import CustomChart from '../resuable/charts/ChartComponent';
 
 const ChartsSection = () => {
   // Available Beds Data
   const bedsData = [
-    { month: 'Jan', Occupied: 45, Reserved: 30, Available: 25, Cleanup: 15, Other: 10 },
-    { month: 'Feb', Occupied: 35, Reserved: 40, Available: 20, Cleanup: 12, Other: 8 },
-    { month: 'Mar', Occupied: 55, Reserved: 35, Available: 30, Cleanup: 18, Other: 12 },
-    { month: 'Apr', Occupied: 40, Reserved: 50, Available: 25, Cleanup: 15, Other: 10 },
-    { month: 'May', Occupied: 30, Reserved: 45, Available: 35, Cleanup: 12, Other: 8 },
-    { month: 'Jun', Occupied: 45, Reserved: 35, Available: 20, Cleanup: 10, Other: 15 },
-    { month: 'Jul', Occupied: 35, Reserved: 40, Available: 25, Cleanup: 18, Other: 12 },
-    { month: 'Aug', Occupied: 60, Reserved: 30, Available: 15, Cleanup: 8, Other: 7 },
-    { month: 'Sep', Occupied: 50, Reserved: 35, Available: 20, Cleanup: 12, Other: 8 },
-    { month: 'Oct', Occupied: 40, Reserved: 30, Available: 25, Cleanup: 15, Other: 10 },
-    { month: 'Nov', Occupied: 45, Reserved: 35, Available: 30, Cleanup: 12, Other: 8 },
-    { month: 'Dec', Occupied: 55, Reserved: 40, Available: 20, Cleanup: 15, Other: 10 }
+    { period: 'Jan', Occupied: 45, Reserved: 30, Available: 25, Cleanup: 15, Other: 10 },
+    { period: 'Feb', Occupied: 35, Reserved: 40, Available: 20, Cleanup: 12, Other: 8 },
+    { period: 'Mar', Occupied: 55, Reserved: 35, Available: 30, Cleanup: 18, Other: 12 },
+    { period: 'Apr', Occupied: 40, Reserved: 50, Available: 25, Cleanup: 15, Other: 10 },
+    { period: 'May', Occupied: 30, Reserved: 45, Available: 35, Cleanup: 12, Other: 8 },
+    { period: 'Jun', Occupied: 45, Reserved: 35, Available: 20, Cleanup: 10, Other: 15 },
+    { period: 'Jul', Occupied: 35, Reserved: 40, Available: 25, Cleanup: 18, Other: 12 },
+    { period: 'Aug', Occupied: 60, Reserved: 30, Available: 15, Cleanup: 8, Other: 7 },
+    { period: 'Sep', Occupied: 50, Reserved: 35, Available: 20, Cleanup: 12, Other: 8 },
+    { period: 'Oct', Occupied: 40, Reserved: 30, Available: 25, Cleanup: 15, Other: 10 },
+    { period: 'Nov', Occupied: 45, Reserved: 35, Available: 30, Cleanup: 12, Other: 8 },
+    { period: 'Dec', Occupied: 55, Reserved: 40, Available: 20, Cleanup: 15, Other: 10 }
   ];
 
   // Patients Data
   const patientsData = [
-    { month: 'Jan', newPatients: 250, returnPatients: 400 },
-    { month: 'Feb', newPatients: 280, returnPatients: 420 },
-    { month: 'Mar', newPatients: 320, returnPatients: 380 },
-    { month: 'Apr', newPatients: 290, returnPatients: 450 },
-    { month: 'May', newPatients: 350, returnPatients: 500 },
-    { month: 'Jun', newPatients: 380, returnPatients: 480 },
-    { month: 'Jul', newPatients: 320, returnPatients: 520 },
-    { month: 'Aug', newPatients: 400, returnPatients: 560 },
-    { month: 'Sep', newPatients: 450, returnPatients: 580 },
-    { month: 'Oct', newPatients: 420, returnPatients: 600 },
-    { month: 'Nov', newPatients: 300, returnPatients: 600 },
-    { month: 'Dec', newPatients: 280, returnPatients: 520 }
+    { period: 'Jan', newPatients: 250, returnPatients: 400 },
+    { period: 'Feb', newPatients: 280, returnPatients: 420 },
+    { period: 'Mar', newPatients: 320, returnPatients: 380 },
+    { period: 'Apr', newPatients: 290, returnPatients: 450 },
+    { period: 'May', newPatients: 350, returnPatients: 500 },
+    { period: 'Jun', newPatients: 380, returnPatients: 480 },
+    { period: 'Jul', newPatients: 320, returnPatients: 520 },
+    { period: 'Aug', newPatients: 400, returnPatients: 560 },
+    { period: 'Sep', newPatients: 450, returnPatients: 580 },
+    { period: 'Oct', newPatients: 420, returnPatients: 600 },
+    { period: 'Nov', newPatients: 300, returnPatients: 600 },
+    { period: 'Dec', newPatients: 280, returnPatients: 520 }
+  ];
+
+  // Income Overview Data (transformed for CustomChart)
+  const incomeData = [
+    { period: 'Jan', patients: 250, income: 4900 },
+    { period: 'Feb', patients: 280, income: 5200 },
+    { period: 'Mar', patients: 320, income: 5800 },
+    { period: 'Apr', patients: 290, income: 5100 },
+    { period: 'May', patients: 350, income: 6200 },
+    { period: 'Jun', patients: 380, income: 6800 },
+    { period: 'Jul', patients: 320, income: 5900 },
+    { period: 'Aug', patients: 400, income: 7200 },
+    { period: 'Sep', patients: 450, income: 8100 },
+    { period: 'Oct', patients: 420, income: 7600 },
+    { period: 'Nov', patients: 300, income: 5400 },
+    { period: 'Dec', patients: 280, income: 5000 }
   ];
 
   // Treatment Type Data
   const treatmentData = [
-    { month: 'Jan', General: 120, Surgery: 80, ICU: 50 },
-    { month: 'Feb', General: 150, Surgery: 90, ICU: 60 },
-    { month: 'Mar', General: 180, Surgery: 100, ICU: 70 },
-    { month: 'Apr', General: 160, Surgery: 85, ICU: 55 },
-    { month: 'May', General: 140, Surgery: 75, ICU: 45 },
-    { month: 'Jun', General: 130, Surgery: 70, ICU: 40 },
-    { month: 'Jul', General: 125, Surgery: 65, ICU: 35 },
-    { month: 'Aug', General: 120, Surgery: 60, ICU: 30 },
-    { month: 'Sep', General: 115, Surgery: 55, ICU: 25 },
-    { month: 'Oct', General: 110, Surgery: 50, ICU: 20 },
-    { month: 'Nov', General: 105, Surgery: 45, ICU: 15 },
-    { month: 'Dec', General: 100, Surgery: 40, ICU: 10 }
+    { period: 'Jan', General: 120, Surgery: 80, ICU: 50 },
+    { period: 'Feb', General: 150, Surgery: 90, ICU: 60 },
+    { period: 'Mar', General: 180, Surgery: 100, ICU: 70 },
+    { period: 'Apr', General: 160, Surgery: 85, ICU: 55 },
+    { period: 'May', General: 140, Surgery: 75, ICU: 45 },
+    { period: 'Jun', General: 130, Surgery: 70, ICU: 40 },
+    { period: 'Jul', General: 125, Surgery: 65, ICU: 35 },
+    { period: 'Aug', General: 120, Surgery: 60, ICU: 30 },
+    { period: 'Sep', General: 115, Surgery: 55, ICU: 25 },
+    { period: 'Oct', General: 110, Surgery: 50, ICU: 20 },
+    { period: 'Nov', General: 105, Surgery: 45, ICU: 15 },
+    { period: 'Dec', General: 100, Surgery: 40, ICU: 10 }
+  ];
+
+  // Treatment Data for CustomChart (transformed format)
+  const customTreatmentData = [
+    { period: 'Jan', General: 120, Surgery: 80, ICU: 50 },
+    { period: 'Feb', General: 150, Surgery: 90, ICU: 60 },
+    { period: 'Mar', General: 180, Surgery: 100, ICU: 70 },
+    { period: 'Apr', General: 160, Surgery: 85, ICU: 55 },
+    { period: 'May', General: 140, Surgery: 75, ICU: 45 },
+    { period: 'Jun', General: 130, Surgery: 70, ICU: 40 },
+    { period: 'Jul', General: 125, Surgery: 65, ICU: 35 },
+    { period: 'Aug', General: 120, Surgery: 60, ICU: 30 },
+    { period: 'Sep', General: 115, Surgery: 55, ICU: 25 },
+    { period: 'Oct', General: 110, Surgery: 50, ICU: 20 },
+    { period: 'Nov', General: 105, Surgery: 45, ICU: 15 },
+    { period: 'Dec', General: 100, Surgery: 40, ICU: 10 }
   ];
 
   // Hospital Earnings Data
@@ -72,7 +105,7 @@ const ChartsSection = () => {
     { title: 'Online Consultation', value: 4900, percentage: 20, trend: 'up' },
     { title: 'Overall Purchases', value: 750, percentage: 26, trend: 'down' },
     { title: 'Pending Invoices', value: 560, percentage: 28, trend: 'up' },
-    { title: 'Monthly Billing', value: 390, percentage: 30, trend: 'up' }
+    { title: 'periodly Billing', value: 390, percentage: 30, trend: 'up' }
   ];
 
   // Insurance Claims Data
@@ -99,164 +132,54 @@ const ChartsSection = () => {
     <div className="space-y-4 md:space-y-6 w-full overflow-hidden">
       {/* Available Beds Chart */}
       <div className="bg-white rounded-2xl p-4 md:p-6 shadow-sm border border-gray-100 w-full overflow-hidden">
-        <h3 className="text-lg md:text-xl font-semibold text-gray-800 mb-4 md:mb-6">Available Beds</h3>
-        <div className="h-64 md:h-80 w-full overflow-hidden">
-          <ResponsiveContainer width="100%" height="100%">
-            <BarChart data={bedsData} barCategoryGap="20%">
-              <CartesianGrid strokeDasharray="3 3" stroke="#f1f5f9" />
-              <XAxis dataKey="month" stroke="#64748b" fontSize={12} />
-              <YAxis stroke="#64748b" fontSize={12} />
-              <Tooltip 
-                contentStyle={{
-                  backgroundColor: 'white',
-                  border: '1px solid #e2e8f0',
-                  borderRadius: '8px',
-                  boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1)'
-                }}
-              />
-              <Bar dataKey="Occupied" fill="#1e40af" radius={[2, 2, 0, 0]} />
-              <Bar dataKey="Reserved" fill="#3b82f6" radius={[2, 2, 0, 0]} />
-              <Bar dataKey="Available" fill="#60a5fa" radius={[2, 2, 0, 0]} />
-              <Bar dataKey="Cleanup" fill="#93c5fd" radius={[2, 2, 0, 0]} />
-              <Bar dataKey="Other" fill="#dbeafe" radius={[2, 2, 0, 0]} />
-            </BarChart>
-          </ResponsiveContainer>
-        </div>
-        <div className="flex flex-wrap justify-center gap-4 mt-4">
-          <div className="flex items-center space-x-2">
-            <div className="w-3 h-3 bg-blue-800 rounded"></div>
-            <span className="text-sm text-gray-600">Occupied</span>
-          </div>
-          <div className="flex items-center space-x-2">
-            <div className="w-3 h-3 bg-blue-600 rounded"></div>
-            <span className="text-sm text-gray-600">Reserved</span>
-          </div>
-          <div className="flex items-center space-x-2">
-            <div className="w-3 h-3 bg-blue-400 rounded"></div>
-            <span className="text-sm text-gray-600">Available</span>
-          </div>
-          <div className="flex items-center space-x-2">
-            <div className="w-3 h-3 bg-blue-300 rounded"></div>
-            <span className="text-sm text-gray-600">Cleanup</span>
-          </div>
-          <div className="flex items-center space-x-2">
-            <div className="w-3 h-3 bg-blue-100 rounded"></div>
-            <span className="text-sm text-gray-600">Other</span>
-          </div>
-        </div>
+         <CustomChart
+          flagToggle={true}
+          title="Available Beds"
+          chartType="bar"
+          data={bedsData}
+          series={[
+            { key: "Occupied", label: "Occupied", color: "#1e40af" },
+            { key: "Reserved", label: "Reserved", color: "#3b82f6" },
+            { key: "Available", label: "Available", color: "#60a5fa" },
+            { key: "Cleanup", label: "Cleanup", color: "#93c5fd" },
+            { key: "Other", label: "Other", color: "#dbeafe" },
+          ]}
+        />
       </div>
 
       {/* Bottom Row Charts */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 md:gap-6 w-full">
-        {/* Patients Chart */}
-        <div className="bg-white rounded-2xl p-4 md:p-6 shadow-sm border border-gray-100 w-full overflow-hidden">
-          <h3 className="text-lg md:text-xl font-semibold text-gray-800 mb-4 md:mb-6">Patients</h3>
-          <div className="h-48 md:h-64 w-full overflow-hidden">
-            <ResponsiveContainer width="100%" height="100%">
-              <AreaChart data={patientsData}>
-                <CartesianGrid strokeDasharray="3 3" stroke="#f1f5f9" />
-                <XAxis dataKey="month" stroke="#64748b" fontSize={12} />
-                <YAxis stroke="#64748b" fontSize={12} />
-                <Tooltip 
-                  contentStyle={{
-                    backgroundColor: 'white',
-                    border: '1px solid #e2e8f0',
-                    borderRadius: '8px',
-                    boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1)'
-                  }}
-                />
-                <defs>
-                  <linearGradient id="colorNew" x1="0" y1="0" x2="0" y2="1">
-                    <stop offset="5%" stopColor="#3b82f6" stopOpacity={0.3}/>
-                    <stop offset="95%" stopColor="#3b82f6" stopOpacity={0.05}/>
-                  </linearGradient>
-                  <linearGradient id="colorReturn" x1="0" y1="0" x2="0" y2="1">
-                    <stop offset="5%" stopColor="#10b981" stopOpacity={0.3}/>
-                    <stop offset="95%" stopColor="#10b981" stopOpacity={0.05}/>
-                  </linearGradient>
-                </defs>
-                <Area
-                  type="monotone"
-                  dataKey="newPatients"
-                  stroke="#3b82f6"
-                  strokeWidth={3}
-                  fill="url(#colorNew)"
-                  dot={{ fill: '#3b82f6', strokeWidth: 2, r: 4 }}
-                />
-                <Area
-                  type="monotone"
-                  dataKey="returnPatients"
-                  stroke="#10b981"
-                  strokeWidth={3}
-                  fill="url(#colorReturn)"
-                  dot={{ fill: '#10b981', strokeWidth: 2, r: 4 }}
-                />
-              </AreaChart>
-            </ResponsiveContainer>
-          </div>
-          <div className="flex justify-center space-x-6 mt-4">
-            <div className="flex items-center space-x-2">
-              <div className="w-3 h-3 bg-blue-600 rounded-full"></div>
-              <span className="text-sm text-gray-600">New Patients</span>
-            </div>
-            <div className="flex items-center space-x-2">
-              <div className="w-3 h-3 bg-green-600 rounded-full"></div>
-              <span className="text-sm text-gray-600">Return Patients</span>
-            </div>
-          </div>
-        </div>
+        {/* Income Overview Chart using CustomChart */}
+        <CustomChart
+          flagToggle={true}
+          title="Patients Data"
+          chartType="area"
+          data={patientsData}
+          series={[
+            { key: "newPatients", label: "newPatients", color: "#3b82f6" },
+            { key: "returnPatients", label: "returnPatients", color: "#9ca3af" },
+          ]}
+        />
 
-        {/* Treatment Type Chart */}
-        <div className="bg-white rounded-2xl p-4 md:p-6 shadow-sm border border-gray-100 w-full overflow-hidden">
-          <h3 className="text-lg md:text-xl font-semibold text-gray-800 mb-4 md:mb-6">Treatment Type</h3>
-          <div className="h-48 md:h-64 w-full overflow-hidden">
-            <ResponsiveContainer width="100%" height="100%">
-              <ComposedChart data={treatmentData}>
-                <CartesianGrid strokeDasharray="3 3" stroke="#f1f5f9" />
-                <XAxis dataKey="month" stroke="#64748b" fontSize={12} />
-                <YAxis stroke="#64748b" fontSize={12} />
-                <Tooltip 
-                  contentStyle={{
-                    backgroundColor: 'white',
-                    border: '1px solid #e2e8f0',
-                    borderRadius: '8px',
-                    boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1)'
-                  }}
-                />
-                <Bar dataKey="General" fill="#93c5fd" radius={[2, 2, 0, 0]} />
-                <Bar dataKey="Surgery" fill="#60a5fa" radius={[2, 2, 0, 0]} />
-                <Bar dataKey="ICU" fill="#3b82f6" radius={[2, 2, 0, 0]} />
-                <Line
-                  type="monotone"
-                  dataKey="General"
-                  stroke="#3b82f6"
-                  strokeWidth={3}
-                  dot={{ fill: '#3b82f6', strokeWidth: 2, r: 4 }}
-                />
-              </ComposedChart>
-            </ResponsiveContainer>
-          </div>
-          <div className="flex justify-center space-x-6 mt-4">
-            <div className="flex items-center space-x-2">
-              <div className="w-3 h-3 bg-blue-600 rounded-full"></div>
-              <span className="text-sm text-gray-600">General</span>
-            </div>
-            <div className="flex items-center space-x-2">
-              <div className="w-3 h-3 bg-blue-400 rounded-full"></div>
-              <span className="text-sm text-gray-600">Surgery</span>
-            </div>
-            <div className="flex items-center space-x-2">
-              <div className="w-3 h-3 bg-blue-300 rounded-full"></div>
-              <span className="text-sm text-gray-600">ICU</span>
-            </div>
-          </div>
-        </div>
+        {/* Treatment Type Chart using CustomChart */}
+        <CustomChart
+          flagToggle={true}
+          title="Treatment Type"
+          chartType="bar"
+          data={customTreatmentData}
+          series={[
+            { key: "General", label: "General", color: "#93c5fd" },
+            { key: "Surgery", label: "Surgery", color: "#60a5fa" },
+            { key: "ICU", label: "ICU", color: "#3b82f6" },
+          ]}
+        />
+
       </div>
 
       {/* Bottom Row - Earnings, Claims, Gender */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6 w-full">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 w-full">
         {/* Hospital Earnings */}
-        <div className="bg-white rounded-2xl p-4 md:p-6 shadow-sm border border-gray-100">
+        <div className="bg-white rounded-2xl p-4 md:p-6  col-span-2 shadow-sm border border-gray-100">
           <h3 className="text-lg md:text-xl font-semibold text-gray-800 mb-4 md:mb-6">Hospital Earnings</h3>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 md:gap-4">
             {/* Online Consultation */}
@@ -283,9 +206,9 @@ const ChartsSection = () => {
                   <div className="text-xl md:text-2xl font-bold text-gray-900">$4900</div>
                   <div className="text-xs md:text-sm text-gray-600 truncate">Online Consultation</div>
                 </div>
-                <div className="flex flex-col items-end">
-                  <div className="flex items-center space-x-1 text-blue-600">
-                    <span className="text-sm font-medium">20%</span>
+                <div className="flex flex-col justify-end items-end ">
+                  <div className="flex ml-3.5  items-start space-x-1 text-blue-600">
+                    <span className=" text-sm ">20%</span>
                     <svg className="w-3 h-3 md:w-4 md:h-4" fill="currentColor" viewBox="0 0 20 20">
                       <path fillRule="evenodd" d="M5.293 7.707a1 1 0 010-1.414l4-4a1 1 0 011.414 0l4 4a1 1 0 01-1.414 1.414L11 5.414V17a1 1 0 11-2 0V5.414L6.707 7.707a1 1 0 01-1.414 0z" clipRule="evenodd" />
                     </svg>
@@ -355,7 +278,7 @@ const ChartsSection = () => {
               </div>
             </div>
 
-            {/* Monthly Billing */}
+            {/* periodly Billing */}
             <div className="border border-gray-200 rounded-xl p-3 md:p-4 hover:shadow-md transition-shadow">
               <div className="flex items-center space-x-3">
                 <div className="w-10 h-10 md:w-12 md:h-12 flex items-center flex-shrink-0">
@@ -366,7 +289,7 @@ const ChartsSection = () => {
                 </div>
                 <div className="flex-1 min-w-0">
                   <div className="text-xl md:text-2xl font-bold text-gray-900">$390</div>
-                  <div className="text-xs md:text-sm text-gray-600 truncate">Monthly Billing</div>
+                  <div className="text-xs md:text-sm text-gray-600 truncate">periodly Billing</div>
                 </div>
                 <div className="flex flex-col items-end">
                   <div className="flex items-center space-x-1 text-blue-600">

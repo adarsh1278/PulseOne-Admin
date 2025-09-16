@@ -2,9 +2,9 @@
 
 import React from 'react';
 import { User, Venus, TrendingUp, Droplet, Stethoscope, Activity, Heart, AlertTriangle, Download, Trash2, FileText } from 'lucide-react';
-import MiniChart from '../../../components/charts/MiniChart';
-import BarChart from '../../../components/charts/BarChart';
-import AreaChart from '../../../components/charts/SimpleAreaChart';
+import MiniChart from '../../../components/resuable/charts/MiniChart.jsx';
+import BarChart from '../../../components/resuable/charts/BarChart';
+import AreaChart from '../../../components/resuable/charts/SimpleAreaChart';
 
 const PatientDashboard = () => {
     // Patient data

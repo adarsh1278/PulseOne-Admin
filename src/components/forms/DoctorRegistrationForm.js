@@ -256,7 +256,7 @@ const DoctorRegistrationForm = ({ doctorData = null, isEdit = false }) => {
   };
 
   return (
-    <div className="flex flex-col h-full bg-white">
+    <div className="flex flex-col px-5 h-full bg-white">
       <div className="flex-1  overflow-y-auto">
         <form onSubmit={handleSubmit} className="h-full">
           <TabContainer defaultTab={0}>
@@ -584,7 +584,7 @@ My name is Dr. David Kemrin. Write your bio here."
                     />
                     <button
                       type="button"
-                      className="absolute right-3 top-8 text-gray-400 hover:text-gray-600"
+                      className="absolute right-3 top-10 text-gray-400 hover:text-gray-600"
                       onClick={() => setShowPassword(!showPassword)}
                     >
                       {showPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
@@ -605,7 +605,7 @@ My name is Dr. David Kemrin. Write your bio here."
                     />
                     <button
                       type="button"
-                      className="absolute right-3 top-8 text-gray-400 hover:text-gray-600"
+                      className="absolute right-3 top-10 text-gray-400 hover:text-gray-600"
                       onClick={() => setShowConfirmPassword(!showConfirmPassword)}
                     >
                       {showConfirmPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}

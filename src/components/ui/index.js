@@ -6,3 +6,4 @@ export { default as FormTextarea } from './FormTextarea';
 export { TabContainer, Tab } from './TabContainer';
 export { default as FileUpload } from './FileUpload';
 export { default as RichTextEditor } from './RichTextEditor';
+export { default as CustomSelect } from './CustomSelect';
