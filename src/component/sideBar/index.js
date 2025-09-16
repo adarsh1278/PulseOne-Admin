@@ -29,7 +29,7 @@ const Sidebar = ({ isCollapsed = false, isHovered = false }) => {
   const showContent = !isCollapsed || isHovered;
 
   return (
-    <div className={`bg-white shadow-lg transition-all duration-300 ease-in-out ${
+    <div className={`bg-primary shadow-lg transition-all duration-300 ease-in-out ${
       isCollapsed && !isHovered ? 'w-16' : 'w-72'
     } h-full flex flex-col border-r border-gray-200 overflow-hidden`}>
       
@@ -37,7 +37,7 @@ const Sidebar = ({ isCollapsed = false, isHovered = false }) => {
       {showContent && (
         <div className="p-4 border-b border-gray-200">
           <div className="flex items-center space-x-3">
-            <div className="w-12 h-12 bg-blue-100 rounded-full overflow-hidden flex items-center justify-center">
+            <div className="w-12 h-12 bg-primary rounded-full overflow-hidden flex items-center justify-center">
               <img 
                 src="https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?w=100&h=100&fit=crop&crop=face&auto=format" 
                 alt="Profile" 
@@ -55,7 +55,7 @@ const Sidebar = ({ isCollapsed = false, isHovered = false }) => {
       {/* Collapsed Profile Icon */}
       {!showContent && (
         <div className="p-3 border-b border-gray-200 flex justify-center">
-          <div className="w-10 h-10 bg-blue-100 rounded-full overflow-hidden flex items-center justify-center">
+          <div className="w-10 h-10 bg-primary rounded-full overflow-hidden flex items-center justify-center">
             <img 
               src="https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?w=100&h=100&fit=crop&crop=face&auto=format" 
               alt="Profile" 
@@ -235,7 +235,7 @@ const Sidebar = ({ isCollapsed = false, isHovered = false }) => {
 
       {/* Emergency Contact */}
       <div className="p-3 border-t border-gray-200">
-        <div className="bg-green-500 text-white rounded-lg p-3 hover:bg-green-600 transition-all duration-200 ease-in-out cursor-pointer hover:shadow-lg">
+        <div className="bg-theme text-white rounded-lg p-3 hover:bg-theme-hover transition-all duration-200 ease-in-out cursor-pointer hover:shadow-lg">
           <div className="flex items-center space-x-3">
             <Phone size={20} />
             {showContent && (

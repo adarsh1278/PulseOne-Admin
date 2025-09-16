@@ -21,8 +21,8 @@ const SidebarItem = ({
       }}
       className={`w-full flex items-center justify-between p-3 rounded-lg transition-all duration-200 ease-in-out group ${
         isActive 
-          ? 'bg-blue-100 text-blue-600 border-r-2 border-blue-600' 
-          : 'text-gray-700 hover:bg-blue-50 hover:text-blue-600'
+          ? 'bg-primary text-theme border-r-2 border-theme' 
+          : 'text-gray-700 hover:bg-primary-hover hover:text-theme'
       } ${className}`}
       suppressHydrationWarning
     >

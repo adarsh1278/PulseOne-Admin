@@ -47,7 +47,7 @@ export default function LayoutClient({ children }) {
   return (
     <div className="flex flex-col h-screen w-screen overflow-hidden">
       {/* Fixed Navbar */}
-      <div className="fixed top-0 left-0 right-0 z-50">
+      <div className="fixed top-0 left-0 right-0  z-10">
         <Navbar toggleSidebar={toggleSidebar} />
       </div>
       
@@ -60,7 +60,7 @@ export default function LayoutClient({ children }) {
               ? `fixed left-0 top-14 h-[calc(100vh-3.5rem)] z-40 transition-transform duration-300 ease-in-out ${
                   isSidebarCollapsed ? '-translate-x-full' : 'translate-x-0'
                 }`
-              : 'flex-shrink-0 relative'
+              : 'flex-shrink-0 relative z-50'
           }`}
           onMouseEnter={handleSidebarMouseEnter}
           onMouseLeave={handleSidebarMouseLeave}

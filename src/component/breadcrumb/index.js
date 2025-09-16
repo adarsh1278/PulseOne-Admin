@@ -16,7 +16,7 @@ const Breadcrumb = ({ currentPage = "Dashboard" }) => {
   ];
 
   return (
-    <div className="bg-gray-50 border-b border-gray-200 px-4 md:px-6 py-3 md:py-4">
+    <div className="bg-primary-active border-b border-b-primary-active px-4 md:px-6 py-3 md:py-4">
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-3 md:gap-0">
         {/* Breadcrumb Navigation */}
         <div className="flex items-center space-x-2 text-sm">
