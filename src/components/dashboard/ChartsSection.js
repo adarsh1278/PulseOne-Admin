@@ -177,7 +177,17 @@ const ChartsSection = () => {
       </div>
 
       {/* Bottom Row - Earnings, Claims, Gender */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 w-full">
+      
+
+    
+     
+    </div>
+  );
+};
+function RADIX() {
+  return ( 
+    <>
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 w-full">
         {/* Hospital Earnings */}
         <div className="bg-white rounded-2xl p-4 md:p-6  col-span-2 shadow-sm border border-gray-100">
           <h3 className="text-lg md:text-xl font-semibold text-gray-800 mb-4 md:mb-6">Hospital Earnings</h3>
@@ -363,14 +373,8 @@ const ChartsSection = () => {
           </div>
         </div>
       </div>
-
-      {/* Footer */}
-      <div className="text-center py-4">
-        <p className="text-sm text-gray-500">© 
-          PlusOne admin 2024</p>
-      </div>
-    </div>
-  );
-};
+    </>
+   )
+}
 
 export default ChartsSection;

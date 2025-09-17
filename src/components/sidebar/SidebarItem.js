@@ -27,11 +27,11 @@ const SidebarItem = ({
       suppressHydrationWarning
     >
       <div className="flex items-center space-x-3">
-        <Icon size={20} className={isActive ? 'text-blue-600' : 'text-gray-600 group-hover:text-blue-600'} />
+        <Icon size={20} className={isActive ? 'text-theme' : 'text-gray-600 group-hover:text-theme transition-colors duration-200'} />
         {!isCollapsed && <span className="font-medium">{label}</span>}
       </div>
       {!isCollapsed && hasArrow && (
-        <ChevronRight size={16} className="text-gray-400 group-hover:text-blue-600" />
+        <ChevronRight size={16} className="text-gray-400 group-hover:text-theme transition-colors duration-200" />
       )}
     </button>
   );

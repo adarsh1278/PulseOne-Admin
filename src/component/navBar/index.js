@@ -77,7 +77,7 @@ const Navbar = ({ toggleSidebar }) => {
 
 
   return (
-    <nav className="bg-white  text-black px-4 md:px-6 py-1 flex items-center justify-between shadow-lg transition-colors duration-200">
+    <nav className="bg-primary-active  text-black px-4 md:px-6 py-1 flex items-center justify-between shadow-lg transition-colors duration-200">
       {/* Left Side - Logo and Menu */}
       <div className="flex items-center space-x-2 md:space-x-4">
         <button 

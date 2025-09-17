@@ -29,7 +29,7 @@ const Sidebar = ({ isCollapsed = false, isHovered = false }) => {
   const showContent = !isCollapsed || isHovered;
 
   return (
-    <div className={`bg-primary shadow-lg transition-all duration-300 ease-in-out ${
+    <div className={`bg-white shadow-lg transition-all duration-300 ease-in-out ${
       isCollapsed && !isHovered ? 'w-16' : 'w-72'
     } h-full flex flex-col border-r border-gray-200 overflow-hidden`}>
       
@@ -77,22 +77,22 @@ const Sidebar = ({ isCollapsed = false, isHovered = false }) => {
           onClick={() => setActiveItem('hospital-dashboard')}
         />
 
-        <SidebarItem
+        {/* <SidebarItem
          link={"/medical/dashboard"}
           icon={Building2}
           label="Medical Dashboard"
           isActive={activeItem === 'medical-dashboard'}
           isCollapsed={!showContent}
           onClick={() => setActiveItem('medical-dashboard')}
-        />
+        /> */}
 
-        <SidebarItem
+        {/* <SidebarItem
           icon={Stethoscope}
           label="Dentist Dashboard"
           isActive={activeItem === 'dentist-dashboard'}
           isCollapsed={!showContent}
           onClick={() => setActiveItem('dentist-dashboard')}
-        />
+        /> */}
 
         {/* Doctors Dropdown */}
         <SidebarDropdown

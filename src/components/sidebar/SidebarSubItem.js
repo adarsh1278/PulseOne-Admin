@@ -16,8 +16,8 @@ const SidebarSubItem = ({ label, onClick = () => {}, link = "" }) => {
       }}
       className={`w-full text-left  cursor-pointer p-2 rounded transition-all duration-200 ease-in-out ${
         isActive 
-          ? 'text-blue-600 bg-blue-50 font-medium' 
-          : 'text-gray-600 hover:text-blue-600 hover:bg-blue-50'
+          ? 'text-theme bg-primary font-medium' 
+          : 'text-gray-600 hover:text-theme hover:bg-primary-hover'
       }`}
       suppressHydrationWarning
     >

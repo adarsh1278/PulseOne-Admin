@@ -32,34 +32,13 @@ const HeroSection = () => {
             <span className="text-blue-100 text-base font-medium">Good Morning,</span>
           </div>
           <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-3 leading-tight">
-            Dr. Smith White
+            Admin
           </h1>
           <p className="text-blue-100 text-lg mb-8">
-            Your schedule today.
+            Welcome to dashbaord
           </p>
           
-          {/* Quick Stats */}
-          <div className="flex flex-wrap gap-4">
-            <div className="bg-cyan-400 rounded-2xl p-4 flex items-center space-x-3 min-w-[140px]">
-              <div className="bg-cyan-500 rounded-xl p-2">
-                <Eye className="w-6 h-6 text-white" />
-              </div>
-              <div>
-                <div className="text-2xl font-bold text-white">9</div>
-                <div className="text-sm text-cyan-50">Appointments</div>
-              </div>
-            </div>
-            
-            <div className="bg-green-400 rounded-2xl p-4 flex items-center space-x-3 min-w-[140px]">
-              <div className="bg-green-500 rounded-xl p-2">
-                <Stethoscope className="w-6 h-6 text-white" />
-              </div>
-              <div>
-                <div className="text-2xl font-bold text-white">3</div>
-                <div className="text-sm text-green-50">Surgeries</div>
-              </div>
-            </div>
-          </div>
+      
         </div>
         
         {/* Right Illustration - Medical Team */}

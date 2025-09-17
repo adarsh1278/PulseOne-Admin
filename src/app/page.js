@@ -18,10 +18,10 @@ export default function Dashboard() {
       <StatsCards />
       
       {/* Hospital Earnings */}
-      <HospitalEarnings />
+      {/* <HospitalEarnings /> */}
       
       {/* Metrics Grid */}
-      <MetricsGrid />
+      {/* <MetricsGrid /> */}
       
       {/* Charts and Analytics */}
       <ChartsSection />

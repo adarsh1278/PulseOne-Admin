@@ -185,7 +185,7 @@ const DoctorsList = () => {
             key: 'sun',
             label: 'Sun',
             render: (value) => (
-                <span className={value === 'NA' ? 'text-red-500' : 'text-gray-700'}>{value}</span>
+                <span className={value === 'NA' ? 'text-danger' : 'text-gray-700'}>{value}</span>
             )
         },
         {
@@ -239,6 +239,7 @@ const DoctorsList = () => {
     };
 
     const handleViewDoctor = (doctor) => {
+        router.push(`/doctor/profile/${doctor.id.replace('#', '')}`);
         console.log('View doctor:', doctor);
     };
 
@@ -253,7 +254,7 @@ const DoctorsList = () => {
     };
 
     return (
-        <div className="min-h-screen bg-gray-50 p-6">
+        <div className="min-h-screen bg-primary p-6">
             <DataTable
                 title="Doctors List"
                 data={doctorsData}

@@ -95,7 +95,7 @@ const PatientsList = () => {
             key: 'gender',
             label: 'Gender',
             render: (value) => (
-                <span className={`px-2 py-1 rounded-full text-xs font-medium ${value === 'Male' ? 'bg-blue-100 text-blue-600' : 'bg-yellow-100 text-yellow-600'}`}>
+                <span className={`px-2 py-1 rounded-full text-xs font-medium ${value === 'Male' ? 'bg-secondary text-white' : 'bg-theme text-white'}`}>
                     {value}
                 </span>
             )
@@ -152,6 +152,7 @@ const PatientsList = () => {
     };
 
     const handleViewPatient = (patient) => {
+        router.push(`/patient/profile/${patient.id.replace('#', '')}`);
         console.log('View patient:', patient);
     };
 
@@ -165,7 +166,7 @@ const PatientsList = () => {
     };
 
     return (
-        <div className="min-h-screen bg-gray-50 p-6">
+        <div className="min-h-screen bg-primary p-6">
             <DataTable
                 title="Patients List"
                 data={patientsData}

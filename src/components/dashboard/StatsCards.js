@@ -1,6 +1,7 @@
 "use client"
 import React from 'react';
-import { Eye, Stethoscope, FlaskConical, DollarSign, ArrowRight } from 'lucide-react';
+import { Users, UserPlus, Stethoscope, Building2, DollarSign, ArrowRight, Plus } from 'lucide-react';
+import { useRouter } from 'next/navigation';
 
 const CircularProgress = ({ percentage, color, size = 80, strokeWidth = 8 }) => {
   const radius = (size - strokeWidth) / 2;
@@ -50,6 +51,8 @@ const CircularProgress = ({ percentage, color, size = 80, strokeWidth = 8 }) => 
 };
 
 const StatsCards = () => {
+  const router = useRouter();
+
   const stats = [
     {
       id: 1,
@@ -58,46 +61,58 @@ const StatsCards = () => {
       change: "+40%",
       changeType: "increase",
       period: "this month",
-      icon: Eye,
-      color: "#10b981", // green
+      icon: UserPlus,
+      color: "var(--color-theme)", // theme green
       bgColor: "bg-white",
-      percentage: 75
+      percentage: 75,
+      addRoute: "/patient/add",
+      viewRoute: "/patient/list",
+      addText: "Add Patient"
     },
     {
       id: 2,
-      title: "OPD Patients",
+      title: "Total Patients",
       value: "360",
       change: "+30%",
       changeType: "increase",
       period: "this month",
-      icon: Stethoscope,
-      color: "#3b82f6", // blue
+      icon: Users,
+      color: "var(--color-secondary)", // secondary blue
       bgColor: "bg-white",
-      percentage: 60
+      percentage: 60,
+      addRoute: "/patient/add",
+      viewRoute: "/patient/list",
+      addText: "Add Patient"
     },
     {
       id: 3,
-      title: "Lab tests",
+      title: "Total Doctors",
       value: "980",
       change: "+60%",
       changeType: "increase",
       period: "this month",
-      icon: FlaskConical,
-      color: "#f97316", // orange
+      icon: Stethoscope,
+      color: "var(--color-warning)", // warning orange
       bgColor: "bg-white",
-      percentage: 85
+      percentage: 85,
+      addRoute: "/doctor/add",
+      viewRoute: "/doctor/list",
+      addText: "Add Doctor"
     },
     {
       id: 4,
-      title: "Total Earnings",
-      value: "$98000",
+      title: "Total Clinics",
+      value: "12",
       change: "+20%",
       changeType: "increase",
       period: "this month",
-      icon: DollarSign,
-      color: "#eab308", // yellow
+      icon: Building2,
+      color: "var(--color-success)", // success green
       bgColor: "bg-white",
-      percentage: 70
+      percentage: 70,
+      addRoute: "/clinic/add",
+      viewRoute: "/clinic/list",
+      addText: "Add Clinic"
     }
   ];
 
@@ -108,7 +123,7 @@ const StatsCards = () => {
         return (
           <div
             key={stat.id}
-            className={`${stat.bgColor} border border-gray-100 rounded-2xl p-6 hover:shadow-lg transition-all duration-300 cursor-pointer group`}
+            className={`${stat.bgColor} border border-gray-100 rounded-2xl p-6 hover:shadow-lg transition-all duration-300  group hover:border-theme`}
           >
             <div className="flex items-center justify-between mb-4">
               <div className="relative">
@@ -133,7 +148,7 @@ const StatsCards = () => {
               </div>
             </div>
             
-            <div className="space-y-2">
+            <div className="space-y-3">
               <h3 className="text-3xl font-bold text-gray-900">{stat.value}</h3>
               <p className="text-gray-600 font-medium">{stat.title}</p>
               
@@ -147,9 +162,24 @@ const StatsCards = () => {
                   </div>
                   <span className="text-xs text-gray-500">{stat.period}</span>
                 </div>
-                
-                <button className="text-sm font-medium group-hover:text-blue-600 transition-colors" style={{ color: stat.color }} suppressHydrationWarning>
+              </div>
+              
+              {/* Action Buttons */}
+              <div className="flex items-center justify-between pt-2 border-t border-gray-100">
+                <button 
+                  onClick={() => router.push(stat.viewRoute)}
+                  className="text-sm font-medium text-theme hover:text-theme-hover transition-colors cursor-pointer" 
+                  suppressHydrationWarning
+                >
                   View All
+                </button>
+                <button
+                  onClick={() => router.push(stat.addRoute)}
+                  className="flex items-center space-x-1 bg-theme hover:bg-theme-hover text-white px-3 py-1.5 rounded-lg transition-colors duration-200 text-sm font-medium cursor-pointer"
+                  suppressHydrationWarning
+                >
+                  <Plus className="w-4 h-4" />
+                  <span>{stat.addText}</span>
                 </button>
               </div>
             </div>
