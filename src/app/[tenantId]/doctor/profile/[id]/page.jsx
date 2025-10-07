@@ -3,8 +3,8 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'next/navigation';
 import { Star, MapPin, Heart, Users, Award as AwardIcon } from 'lucide-react';
-import ReviewsSection from '../../../../components/profile/ReviewsSection';
-import AwardsSection from '../../../../components/profile/AwardsSection';
+import ReviewsSection from '../../../../../components/profile/ReviewsSection';
+import AwardsSection from '../../../../../components/profile/AwardsSection';
 
 const DoctorProfilePage = () => {
     const params = useParams();

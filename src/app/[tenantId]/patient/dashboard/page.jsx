@@ -1,14 +1,14 @@
 'use client';
 
 import React from 'react';
-import PatientInfoHeader from '../../../components/dashboard/PatientInfoHeader';
-import HealthMetricsGrid from '../../../components/dashboard/HealthMetricsGrid';
-import PatientChartsSection from '../../../components/dashboard/PatientChartsSection';
-import HealthActivityChart from '../../../components/dashboard/HealthActivityChart';
-import PharmacySection from '../../../components/dashboard/PharmacySection';
-import TimelineSection from '../../../components/dashboard/TimelineSection';
-import DoctorVisitsTable from '../../../components/dashboard/DoctorVisitsTable';
-import ReportsTable from '../../../components/dashboard/ReportsTable';
+import PatientInfoHeader from '../../../../components/dashboard/PatientInfoHeader';
+import HealthMetricsGrid from '../../../../components/dashboard/HealthMetricsGrid';
+import PatientChartsSection from '../../../../components/dashboard/PatientChartsSection';
+import HealthActivityChart from '../../../../components/dashboard/HealthActivityChart';
+import PharmacySection from '../../../../components/dashboard/PharmacySection';
+import TimelineSection from '../../../../components/dashboard/TimelineSection';
+import DoctorVisitsTable from '../../../../components/dashboard/DoctorVisitsTable';
+import ReportsTable from '../../../../components/dashboard/ReportsTable';
 
 // Import data
 import {
@@ -20,7 +20,7 @@ import {
     timelineData,
     doctorVisits,
     reports
-} from '../../../data/patientData';
+} from '../../../../data/patientData';
 
 const PatientDashboard = () => {
     return (

@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react';
 import { useRouter } from 'next/navigation';
-import DoctorCard from '../../../components/cards/DoctorCard';
+import DoctorCard from '../../../../components/cards/DoctorCard';
 
 const DoctorCardsPage = () => {
     const router = useRouter();

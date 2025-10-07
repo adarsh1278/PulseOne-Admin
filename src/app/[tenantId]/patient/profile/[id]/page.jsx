@@ -2,7 +2,7 @@
 import React from 'react';
 import { useRouter, useParams } from 'next/navigation';
 import { ArrowLeft, User, Phone, Mail, MapPin, Calendar, Droplet } from 'lucide-react';
-import { patientsData } from '../../../../data/patientsData';
+import { patientsData } from '../../../../../data/patientsData';
 
 export default function PatientProfilePage() {
     const router = useRouter();
@@ -63,8 +63,8 @@ export default function PatientProfilePage() {
                                 <p className="text-gray-600">Patient ID: {patient.id}</p>
                                 <div className="flex items-center space-x-4 mt-2">
                                     <span className={`inline-flex px-3 py-1 text-sm font-semibold rounded-full ${patient.gender === 'Male'
-                                            ? 'bg-blue-100 text-blue-800'
-                                            : 'bg-pink-100 text-pink-800'
+                                        ? 'bg-blue-100 text-blue-800'
+                                        : 'bg-pink-100 text-pink-800'
                                         }`}>
                                         {patient.gender}
                                     </span>

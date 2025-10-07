@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { useParams } from 'next/navigation';
-import DoctorRegistrationForm from '../../../../components/forms/DoctorRegistrationForm';
+import DoctorRegistrationForm from '../../../../../components/forms/DoctorRegistrationForm';
 
 export default function EditDoctorPage() {
     const params = useParams();
