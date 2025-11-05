@@ -6,8 +6,8 @@ const initialState = {
   token: null,
   userRole: null,
   user: null,
-  error: null,
-};
+  tenantId:null,
+}
 
 const authReducer = (state = initialState, action) => {
   switch (action.type) {

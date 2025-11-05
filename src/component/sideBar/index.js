@@ -233,6 +233,17 @@ const Sidebar = ({ isCollapsed = false, isHovered = false }) => {
 
       </nav>
 
+      {/* Quick Links */}
+      {showContent && (
+        <div className="p-3 border-t border-gray-200 bg-gray-50">
+          <p className="text-xs font-semibold text-gray-600 mb-2 px-2">QUICK LINKS</p>
+          <SidebarSubItem 
+            label="Create Entity Admin" 
+            link={`/${activeItem}/createEntityUser`}
+          />
+        </div>
+      )}
+
       {/* Emergency Contact */}
       <div className="p-3 border-t border-gray-200">
         <div className="bg-theme text-white rounded-lg p-3 hover:bg-theme-hover transition-all duration-200 ease-in-out cursor-pointer hover:shadow-lg">

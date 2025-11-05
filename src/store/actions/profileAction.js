@@ -3,12 +3,12 @@ import { Login } from "@/services/apiendpoint";
 import { showSuccess, showError, showLoading, hideLoading } from "@/utils/toasttheme";
 import toast from "react-hot-toast";
 
-// Auth Actions
+
 export const UserLogin = (credentials) => async (dispatch) => {
   try {
     dispatch({ type: TYPES.USER_LOGIN_LOADING });
     
-    // Show loading toast
+  
     const loadingToastId = showLoading('Signing in...');
     
     const response = await Login(credentials);

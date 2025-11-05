@@ -25,7 +25,7 @@ export default function AddPatientPage() {
                             Add New Patient
                         </h1>
                         <p className="text-gray-600 mb-8">
-                            This page is under construction. Patient registration form will be implemented here.
+                            This  is under construction. Patient registration form will be implemented here.
                         </p>
                         <button
                             onClick={() => router.push('/patient/list')}

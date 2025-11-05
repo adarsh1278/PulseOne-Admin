@@ -1,175 +1,225 @@
 "use client";
-import { useState } from 'react';
-import { Building2, MapPin, Phone, Users, LogOut, ChevronRight } from 'lucide-react';
+
+import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { useDispatch, useSelector } from 'react-redux';
 import { UserLogout } from '@/store/actions/profileAction';
+import { createHospital, getHospitals } from '@/store/actions/hospitalAction';
+import { showSuccess, showError } from '@/utils/toasttheme';
 import toast from 'react-hot-toast';
 
-const hospitals = [
-  {
-    id: 'h001',
-    name: 'St. Mary\'s Medical Center',
-    location: 'New York, NY',
-    beds: 450,
-    phone: '(212) 555-0123',
-    type: 'General Hospital'
-  },
-  {
-    id: 'h002',
-    name: 'Central City Hospital',
-    location: 'Chicago, IL',
-    beds: 320,
-    phone: '(312) 555-0456',
-    type: 'Trauma Center'
-  },
-  {
-    id: 'h003',
-    name: 'Riverside Health Institute',
-    location: 'Los Angeles, CA',
-    beds: 580,
-    phone: '(213) 555-0789',
-    type: 'General Hospital'
-  },
-  {
-    id: 'h004',
-    name: 'Valley View Medical',
-    location: 'Phoenix, AZ',
-    beds: 275,
-    phone: '(602) 555-0321',
-    type: 'Specialty Hospital'
-  },
-  {
-    id: 'h005',
-    name: 'Lakeside Regional Hospital',
-    location: 'Seattle, WA',
-    beds: 410,
-    phone: '(206) 555-0654',
-    type: 'General Hospital'
-  },
-  {
-    id: 'h006',
-    name: 'Metro General Hospital',
-    location: 'Boston, MA',
-    beds: 390,
-    phone: '(617) 555-0987',
-    type: 'Teaching Hospital'
-  }
-];
+import Sidebar from './Sidebar';
+import HospitalListView from './HospitalListView';
+import CreateHospitalView from './CreateHospitalView';
+
+
 
 export default function HospitalListPage() {
-  const [selectedTenant, setSelectedTenant] = useState(null);
+  const [showCreateForm, setShowCreateForm] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [errors, setErrors] = useState({});
+  const [formData, setFormData] = useState({
+   
+   name: 'Sunrise Care Hospital',
+  description: 'A multi-specialty hospital providing quality healthcare services.',
+  address1: '123 Health Avenue',
+  address2: 'Near Green Park Metro',
+  city: 'New Delhi',
+  zip: '110016',
+  country: 'India',
+  cell_number: '9876543210',
+  phone_number1: '01123456789',
+  phone_number2: '01123456790',
+  email: 'contact@sunrisecare.in',
+  emergency_contact_type: 'Administrator',
+  emergency_contact_number1: '9998887777',
+  emergency_contact_number2: '8887776666',
+  logo: 'https://example.com/hospital-logo.png',
+    hospitalregnumber: '',
+  });
+
   const router = useRouter();
   const dispatch = useDispatch();
+  const { loading: createHospitalLoading, error: createError } = useSelector(
+    (state) => state.hospital || {}
+  );
+
+  // Handle create hospital click
+  const handleCreateClick = () => {
+    setShowCreateForm(true);
+    resetForm();
+  };
+
+  // Handle back button
+  const handleBackClick = () => {
+    setShowCreateForm(false);
+    resetForm();
+  };
+
+  // Reset form
+  const resetForm = () => {
+  
+    setErrors({});
+  };
+
+  // Handle input change
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({
+      ...prev,
+      [name]: value
+    }));
+
+    // Clear error when user types
+    if (errors[name]) {
+      setErrors((prev) => ({
+        ...prev,
+        [name]: ''
+      }));
+    }
+  };
+
+  // Validate form
+  const validateForm = () => {
+    const newErrors = {};
+
+    if (!formData.name.trim()) {
+      newErrors.name = 'Hospital name is required';
+    }
+
+    if (!formData.email.trim()) {
+      newErrors.email = 'Email is required';
+    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
+      newErrors.email = 'Please enter a valid email address';
+    }
+
+    if (!formData.address1.trim()) {
+      newErrors.address1 = 'Address is required';
+    }
+
+    if (!formData.city.trim()) {
+      newErrors.city = 'City is required';
+    }
+
+    if (!formData.country.trim()) {
+      newErrors.country = 'Country is required';
+    }
+
+    if (!formData.cell_number.trim()) {
+      newErrors.cell_number = 'Cell number is required';
+    } else if (!/^[\+]?[1-9][\d]{0,15}$/.test(formData.cell_number.replace(/[\s\-\(\)]/g, ''))) {
+      newErrors.cell_number = 'Please enter a valid phone number';
+    }
+
+    if (formData.phone_number1 && !/^[\+]?[1-9][\d]{0,15}$/.test(formData.phone_number1.replace(/[\s\-\(\)]/g, ''))) {
+      newErrors.phone_number1 = 'Please enter a valid phone number';
+    }
+
+    if (formData.phone_number2 && !/^[\+]?[1-9][\d]{0,15}$/.test(formData.phone_number2.replace(/[\s\-\(\)]/g, ''))) {
+      newErrors.phone_number2 = 'Please enter a valid phone number';
+    }
+
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
+  const {user}= useSelector((state)=>state.auth||{});
+
+  // Handle form submit
+  const handleSubmit = async (e) => {
+    console.log("form submitted");
+    e.preventDefault();
+
+    if (!validateForm()) {
+      return;
+    }
+
+    setIsSubmitting(true);
+  
+    try {
+      const submitData = {
+        ...formData,
+       
+      };
+
+      console.log('Creating hospital with data:', submitData);
+
+      await dispatch(createHospital(submitData , user?.tenantId));
+
+      // Reset form and go back to list
+      setTimeout(() => {
+        handleBackClick();
+      }, 1500);
+    } catch (error) {
+      console.error('Error creating hospital:', error);
+      showError(error.message || 'Failed to create hospital');
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
+  // Handle card click
   const handleCardClick = (id) => {
-    setSelectedTenant(id);
-    // Simulate routing to /tenant/:id
     router.push(`/${id}`);
-    console.log(`Navigating to /tenant/${id}`);
   };
 
+  // Handle logout
   const handleLogout = () => {
-    dispatch(UserLogout())
-    toast.success("Logged out successfully");
+    dispatch(UserLogout());
+    toast.success('Logged out successfully');
     router.push('/login');
-    console.log('Logging out...');
   };
+const dispath = useDispatch();
 
+const {loading , hospitalList , success} = useSelector((state)=>state.hospitals);
+
+useEffect(()=>{
+  console.log("fetched hospitals data:",hospitalList);
+},[loading,hospitalList])
+let counter = 0;
+useEffect(()=>{
+   console.log("hospital list page loaded");
+   if(!user){
+    router.push('/login');
+   }
+   else{
+    if(!loading&&!success&&hospitalList.length==0){
+      console.log( "counter" , counter)
+      counter++;
+
+   dispatch(getHospitals(user?.tenantId));
+    }
+   }
+},[user])
   return (
-    <div className="flex h-screen bg-gray-50">
+    <div className="flex h-screen bg-gray-50" >
       {/* Sidebar */}
-      <div className="w-64 bg-white shadow-lg flex flex-col">
-        <div className="flex-1 p-6">
-          <div className="flex items-center gap-3 mb-8">
-            <Building2 className="w-8 h-8 text-blue-600" />
-            <h1 className="text-xl font-bold text-gray-800">HealthCare Portal</h1>
-          </div>
-          
-          <nav className="space-y-2">
-            <div className="px-4 py-3 bg-blue-50 text-blue-700 rounded-lg font-medium">
-              Hospital List
-            </div>
-          </nav>
-        </div>
-        
-        {/* Logout Button at Bottom */}
-        <div className="p-6 border-t">
-          <button 
-            onClick={handleLogout}
-            className=" cursor-pointer w-full flex items-center justify-center gap-2 px-4 py-3 bg-red-50 text-red-600 rounded-lg hover:bg-red-100 transition-colors font-medium"
-          >
-            <LogOut className="w-5 h-5" />
-            Logout
-          </button>
-        </div>
-      </div>
+      <Sidebar onLogout={handleLogout} />
 
       {/* Main Content */}
       <div className="flex-1 overflow-auto">
-        <div className="p-8">
-          {/* Welcome Message */}
-          <div className="mb-8">
-            <h2 className="text-3xl font-bold text-gray-800 mb-2">Welcome back!</h2>
-            <p className="text-gray-600">Select a hospital to view tenant details</p>
-          </div>
-
-          {/* Hospital Cards Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {hospitals.map((hospital) => (
-              <div
-                key={hospital.id}
-                onClick={() => handleCardClick(hospital.id)}
-                className="bg-white rounded-xl shadow-md hover:shadow-xl transition-all duration-300 cursor-pointer border-2 border-transparent hover:border-blue-500 p-6"
-              >
-                <div className="flex items-start justify-between mb-4">
-                  <div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center">
-                    <Building2 className="w-6 h-6 text-blue-600" />
-                  </div>
-                  <ChevronRight className="w-5 h-5 text-gray-400" />
-                </div>
-                
-                <h3 className="text-lg font-bold text-gray-800 mb-2">
-                  {hospital.name}
-                </h3>
-                
-                <div className="space-y-2 mb-4">
-                  <div className="flex items-center gap-2 text-sm text-gray-600">
-                    <MapPin className="w-4 h-4" />
-                    {hospital.location}
-                  </div>
-                  
-                  <div className="flex items-center gap-2 text-sm text-gray-600">
-                    <Phone className="w-4 h-4" />
-                    {hospital.phone}
-                  </div>
-                  
-                  <div className="flex items-center gap-2 text-sm text-gray-600">
-                    <Users className="w-4 h-4" />
-                    {hospital.beds} beds
-                  </div>
-                </div>
-                
-                <div className="pt-4 border-t">
-                  <span className="inline-block px-3 py-1 bg-green-100 text-green-700 text-xs font-medium rounded-full">
-                    {hospital.type}
-                  </span>
-                </div>
-              </div>
-            ))}
-          </div>
-
-          {/* Selected Tenant Info */}
-          {selectedTenant && (
-            <div className="mt-8 p-4 bg-blue-50 border border-blue-200 rounded-lg">
-              <p className="text-blue-800">
-                <span className="font-semibold">Selected Tenant ID:</span> {selectedTenant}
-              </p>
-              <p className="text-sm text-blue-600 mt-1">
-                (In a real app, this would route to /tenant/{selectedTenant})
-              </p>
-            </div>
-          )}
-        </div>
+        {loading&&(
+          <div className="flex items-center justify-center min-h-screen bg-gray-50">
+      <div className="w-12 h-12 border-4 border-blue-500 border-t-transparent rounded-full animate-spin"></div>
+    </div>
+        )}
+        {!showCreateForm ? (
+          <HospitalListView
+            hospitals={hospitalList}
+            onCreateClick={handleCreateClick}
+            onCardClick={handleCardClick}
+          />
+        ) : (
+          <CreateHospitalView
+            formData={formData}
+            errors={errors}
+            isSubmitting={isSubmitting}
+            createHospitalLoading={createHospitalLoading}
+            createError={createError}
+            onInputChange={handleInputChange}
+            onSubmit={handleSubmit}
+            onBackClick={handleBackClick}
+          />
+        )}
       </div>
     </div>
   );
